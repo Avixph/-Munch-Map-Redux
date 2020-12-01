@@ -6,13 +6,15 @@
   "author": "Shafee <shafeelinks@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "nodemon": "^2.0.6",
     "parcel-bundler": "^1.12.4"
   },
   "scripts": {
     "start": "parcel src/index.html"
   },
   "dependencies": {
-    "axios": "^0.21.0"
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0"
   },
   "browserslist": [
     "last 1 chrome version"
