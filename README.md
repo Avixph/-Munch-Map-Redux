@@ -37,7 +37,10 @@ The following are the API utilized by Munch Map
  | "Zomato APIs give you access to the freshest and most exhaustive information for over 1.5 million restaurants across 10,000 cities globally." | "Build customized, agile experiences that bring the real world to your users with static and dynamic maps" |
 
 ## 🗓 Additional 📌
-
+Features we would like to add in the future:
+> - [Direction services](https://developers.google.com/maps/documentation/javascript/examples/directions-complex#maps_directions_complex-html)
+> - [Adding stock food images](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fwww.pexels.com%2Fapi%2F)
+> - [Styling the map](https://developers.google.com/maps/documentation/javascript/examples/map-id-style)
 
 ## 📚 Resources 📚
 Munch Map would not be possible without these sources:
