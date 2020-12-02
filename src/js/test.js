@@ -32,8 +32,6 @@ function giveLocation(position) {
             const geocode = await axios.get(`${ZOMATO_URL}geocode?lat=${latitude}&lon=${longitude}`, config);
             // RESTAURANT ID FROM GEOCODE
             let restaurant_id = geocode.data.nearby_restaurants[0].restaurant.R.res_id;
-            // GETTING CUISINE DATA
-            // const cuisine = await axios.get(`${ZOMATO_URL}cuisines?lat=${latitude}&lon=${longitude}`, config);
             // GETTING REVIEWS DATA
             const reviews = await axios.get(`${ZOMATO_URL}reviews?res_id=${restaurant_id}`, config);
 
