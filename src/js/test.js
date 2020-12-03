@@ -30,20 +30,58 @@ function giveLocation(position) {
             };
             // GETTING GEOCODE DATA
             const geocode = await axios.get(`${ZOMATO_URL}geocode?lat=${latitude}&lon=${longitude}`, config);
-            // RESTAURANT ID FROM GEOCODE
-            let restaurant_id = geocode.data.nearby_restaurants[0].restaurant.R.res_id;
-            // GETTING CUISINE DATA
-            // const cuisine = await axios.get(`${ZOMATO_URL}cuisines?lat=${latitude}&lon=${longitude}`, config);
-            // GETTING REVIEWS DATA
-            const reviews = await axios.get(`${ZOMATO_URL}reviews?res_id=${restaurant_id}`, config);
 
-            console.log(geocode, reviews);
+            console.log(geocode);
 
-            for (let item of geocode.data.nearby_restaurants) {
-                console.log(item.restaurant.name);
-                console.log("Longitude: ", item.restaurant.location.longitude);
-                console.log("Latitude:", item.restaurant.location.latitude);
+            const allRestaurants = {};
+            const topCuisines = [];
+            const subzone = `${geocode.data.popularity.subzone}, ${geocode.data.popularity.city}`;
+
+            console.log("Subzone: \n", subzone);
+            for (let item of geocode.data.popularity.top_cuisines) {
+                topCuisines.push(item);
             }
+
+            console.log("Top cuisines in the area: \n", topCuisines);
+            for (let item of geocode.data.nearby_restaurants) {
+
+                if (item.restaurant.user_rating.aggregate_rating === 0) {
+                    item.restaurant.user_rating.aggregate_rating = "No rating available";
+                }
+
+                allRestaurants[item.restaurant.name] =
+                {
+                    ResCoordinates: { latitude: item.restaurant.location.latitude, longitude: item.restaurant.location.longitude, },
+                    RestaurantName: item.restaurant.name,
+                    Score: `${item.restaurant.user_rating.aggregate_rating}/5.0`,
+                    Cuisine: item.restaurant.cuisines,
+                    AverageCost: `$${item.restaurant.average_cost_for_two}`,
+                    PriceRange: `${item.restaurant.price_range}/5`,
+                    Thumbnail: item.restaurant.thumb,
+                    Location: `${item.restaurant.location.address}`
+                };
+            }
+
+            let restaurantValues = Object.values(allRestaurants);
+            console.log("Example restaurant:\n", restaurantValues[1]);
+
+
+
+            // for (let item of resIDs) {
+            //     const rev = await axios.get(`${ZOMATO_URL}reviews?res_id=${item}`, config);
+            //     console.log(rev.data.user_reviews[0].review.rating_text);
+            // }
+
+            // for (let rating of reviews.data.user_reviews) {
+            //     console.log(rating.review.rating_text);
+            // }
+
+            // for (let item of resIDs) {
+            //     const reviews = await axios.get(`${ZOMATO_URL}reviews?res_id=${item}`, config);
+            //     console.log(reviews);
+            // }
+
+
 
         } catch (e) {
             console.log('error', e);
