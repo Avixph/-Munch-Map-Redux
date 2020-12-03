@@ -28,6 +28,8 @@ function giveLocation(position) {
   window.initMap = () => {
     // JS API is loaded and available
     const userLocation = { lat: latitude, lng: longitude };
+    // const icon = "../src/images/logos/map-pin.png";
+
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 14,
       center: userLocation,
@@ -37,6 +39,7 @@ function giveLocation(position) {
       map,
       title: "munch map!",
     });
+
     const iconBase =
       "../src/images/logos/";
     const icons = {
@@ -67,14 +70,15 @@ function giveLocation(position) {
       },
     ];
 
-    // Create markers.
-    for (let i = 0; i < features.length; i++) {
-      const marker = new google.maps.Marker({
-        position: restaurants[i].position,
-        icon: icons[restaurants[i].type].icon,
-        map: map,
-      });
-    }
+
+    const image =
+      "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+    const flag = { lat: 40.8489722222, lng: -73.8622888889 }
+    const marker = new google.maps.Marker({
+      position: flag,
+      map,
+      icon: image,
+    });
   };
 
   // Append the 'script' element to 'head'
