@@ -40,40 +40,39 @@ function giveLocation(position) {
       title: "munch map!",
     });
 
-    const iconBase =
-      "../src/images/logos/";
-    const icons = {
-      info: {
-        icon: "../src/images/logos/map-pin.png",
-      },
-    };
-    const restaurants = [
-      {
-        position: new google.maps.LatLng(40.8489722222, -73.8622888889),
-        type: "info",
-      },
-      {
-        position: new google.maps.LatLng(40.8321416667, -73.8510277778),
-        type: "info",
-      },
-      {
-        position: new google.maps.LatLng(40.8361027778, -73.8549194444),
-        type: "info",
-      },
-      {
-        position: new google.maps.LatLng(40.8322027778, -73.8649583333),
-        type: "info",
-      },
-      {
-        position: new google.maps.LatLng(40.8251611111, -73.8702777778),
-        type: "info",
-      },
-    ];
-
+    // const iconBase =
+    //   "../src/images/logos/";
+    // const icons = {
+    //   info: {
+    //     icon: "../src/images/logos/map-pin.png",
+    //   },
+    // };
+    // const restaurants = [
+    //   {
+    //     position: new google.maps.LatLng(40.8489722222, -73.8622888889),
+    //     type: "info",
+    //   },
+    //   {
+    //     position: new google.maps.LatLng(40.8321416667, -73.8510277778),
+    //     type: "info",
+    //   },
+    //   {
+    //     position: new google.maps.LatLng(40.8361027778, -73.8549194444),
+    //     type: "info",
+    //   },
+    //   {
+    //     position: new google.maps.LatLng(40.8322027778, -73.8649583333),
+    //     type: "info",
+    //   },
+    //   {
+    //     position: new google.maps.LatLng(40.8251611111, -73.8702777778),
+    //     type: "info",
+    //   },
+    // ];
 
     const image =
       "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
-    const flag = { lat: 40.8489722222, lng: -73.8622888889 }
+    const flag = { lat: 40.8489722222, lng: -73.8622888889 };
     const marker = new google.maps.Marker({
       position: flag,
       map,
