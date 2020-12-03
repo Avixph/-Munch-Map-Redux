@@ -41,7 +41,7 @@ function giveLocation(position) {
       "../src/images/logos/";
     const icons = {
       info: {
-        icon: iconBase + "map-pin.png",
+        icon: "../src/images/logos/map-pin.png",
       },
     };
     const restaurants = [
