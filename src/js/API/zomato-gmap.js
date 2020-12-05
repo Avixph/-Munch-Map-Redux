@@ -38,9 +38,9 @@ function giveLocation(position) {
       const allRestaurants = {};
       const topCuisines = [];
 
-      // const subzone = `${geocode.data.popularity.subzone}, ${geocode.data.popularity.city}`;
-
-      // console.log("Subzone: \n", subzone);
+      const subzone = `${geocode.data.popularity.subzone}, ${geocode.data.popularity.city}`;
+      let area = document.querySelector('.subzone');
+      area.innerText = subzone;
 
       const allCuisineItems = document.querySelectorAll('#cuisine-1, #cuisine-2, #cuisine-3, #cuisine-4, #cuisine-5');
 
@@ -53,9 +53,13 @@ function giveLocation(position) {
       }
 
       for (let item of geocode.data.nearby_restaurants) {
-        //   if (item.restaurant.user_rating.aggregate_rating === 0) {
-        //     item.restaurant.user_rating.aggregate_rating = "No rating available";
-        //   }
+        if (typeof item.restaurant.price_range === 'number') {
+          let numOfTimes = item.restaurant.price_range;
+          item.restaurant.price_range = '';
+          for (let i = 0; i < numOfTimes; i++) {
+            item.restaurant.price_range += '$';
+          }
+        }
 
         allRestaurants[item.restaurant.name] = {
           ResCoordinates: {
@@ -67,19 +71,15 @@ function giveLocation(position) {
           Score: `${item.restaurant.user_rating.aggregate_rating}`,
           ReviewText: `${item.restaurant.user_rating.rating_text}`,
           Cuisine: item.restaurant.cuisines,
-          AverageCost: `$${item.restaurant.average_cost_for_two}`,
-          PriceRange: `${item.restaurant.price_range}/5`,
+          AverageCost: `${item.restaurant.average_cost_for_two}`,
+          PriceRange: `${item.restaurant.price_range}`,
           FeaturedImg: item.restaurant.featured_image,
           Location: `${item.restaurant.location.address}`,
         };
+
       }
 
       let restaurantValues = Object.values(allRestaurants);
-      // console.log("Example restaurant:\n", restaurantValues[1]);
-
-      let cardSection = document.querySelector('.card-section');
-
-      console.log(`ASDASDIASDJAS`, restaurantValues);
 
       let restaurant = ({ RestaurantName, Score, ReviewText, Cuisine, AverageCost, PriceRange, FeaturedImg, Location }) => {
         return `
@@ -91,10 +91,10 @@ function giveLocation(position) {
                         <div class="col-12 card-info">
                             <ul>
                                 <li>Cuisine: <span class="info">${Cuisine}</span></li>
-                                <li>Price range: <span class="info">${PriceRange}</span></li>
-                                <li>Average cost for two: <span class="info">${AverageCost}</span></li>
+                                <li>Price range: <span class="info money">${PriceRange}</span></li>
+                                <li>Average cost for two: <span class="info">${Number(AverageCost) ? `$${AverageCost}` : `N/A`}</span></li>
                                 <li>Location: <span class="info">${Location}</span></li>
-                                <li>Score: <span class="info">${Number(Score) ? `${Score} / 5.0` : `Not rated`}</span></li>
+                                <li>Score: <span class="info">${Number(Score) ? `${Score} / 5.0` : `N/A`}</span></li>
                             </ul>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ function giveLocation(position) {
                         <div class="col-12 text-center food-pic">
                   
                             <img src="${FeaturedImg ? FeaturedImg : 'https://thebattengroup.com/wp-content/uploads/2017/03/no-image-icon.png'}" alt="" /> 
-                            <h3>"<span class="info">${ReviewText}"</span></h3>
+                            <h3><span class="info review">"${ReviewText}"</span></h3>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@ function giveLocation(position) {
         </div>`;
       };
 
-      // C:\Users\bxsha\Documents\Phase1-Redux\-Munch-Map-Redux\src\images\No-Image.png
+      let cardSection = document.querySelector('.card-section');
 
       for (let item of restaurantValues) {
         let resDiv = document.createElement('div');
@@ -120,39 +120,39 @@ function giveLocation(position) {
         resDiv.innerHTML = restaurant(item);
         cardSection.append(resDiv);
       }
-
+      // COMMENT BELOW
       // DISPLAYING GMAPS JS API
-      const script = document.createElement("script");
-      script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
-      script.defer = true;
-      console.log(script);
+      // const script = document.createElement("script");
+      // script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
+      // script.defer = true;
+      // console.log(script);
 
-      window.initMap = () => {
-        // GMAPS JS API IS LOADED AND AVAILABLE
-        const userLocation = { lat: latitude, lng: longitude };
-        const image =
-          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 14,
-          center: userLocation,
-        });
-        new google.maps.Marker({
-          position: userLocation,
-          map,
-          title: "munch map!",
-        });
+      // window.initMap = () => {
+      //   // GMAPS JS API IS LOADED AND AVAILABLE
+      //   const userLocation = { lat: latitude, lng: longitude };
+      //   const image =
+      //     "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
+      //   const map = new google.maps.Map(document.getElementById("map"), {
+      //     zoom: 14,
+      //     center: userLocation,
+      //   });
+      //   new google.maps.Marker({
+      //     position: userLocation,
+      //     map,
+      //     title: "munch map!",
+      //   });
 
-        for (let item of restaurantValues) {
-          const marker = new google.maps.Marker({
-            position: item.ResCoordinates,
-            map,
-            icon: image,
-          });
-        }
-      };
-      // Append the 'script' element to 'head'
-      document.head.appendChild(script);
-      initMap();
+      //   for (let item of restaurantValues) {
+      //     const marker = new google.maps.Marker({
+      //       position: item.ResCoordinates,
+      //       map,
+      //       icon: image,
+      //     });
+      //   }
+      // };
+      // // Append the 'script' element to 'head'
+      // document.head.appendChild(script);
+      // initMap();
     } catch (e) {
       console.log("error", e);
     }
