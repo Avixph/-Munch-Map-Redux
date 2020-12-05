@@ -91,7 +91,7 @@ function giveLocation(position) {
                         <div class="col-12 card-info">
                             <ul>
                                 <li>Cuisine: <span class="info">${Cuisine}</span></li>
-                                <li>Price range: <span class="info">$${PriceRange}</span></li>
+                                <li>Price range: <span class="info">${PriceRange}</span></li>
                                 <li>Average cost for two: <span class="info">${AverageCost}</span></li>
                                 <li>Location: <span class="info">${Location}</span></li>
                                 <li>Score: <span class="info">${Number(Score) ? `${Score} / 5.0` : `Not rated`}</span></li>
