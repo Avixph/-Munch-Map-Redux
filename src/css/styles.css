@@ -1,16 +1,89 @@
-/* Styles */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;400;700&display=swap");
 
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-#map {
-  height: 100%;
+:root {
+	--marigold: #e6a42e;
+	--darkorange: rgb(255, 111, 0);
+	--white: #fdfcfc;
+	--babyblue: #b1d2f0;
+	--peachpuff: #ffda8b;
+	--grayish: #616161;
+	--rajah: #f7b06d;
+	--shadow: 6px 6px 9px #ffffff31, -6px -6px 9px #00000013;
+	--shadow-inset: inset 6px 6px 9px #00000031, inset -6px -6px 9px #a3a0a025;
+	--font: "Roboto Slab", serif;
 }
 
-/* Optional: Makes the sample page fill the window. */
-html,
 body {
-  height: 60%;
-  width: 60%;
-  margin: 20px;
-  padding: 0;
+	font-family: "Roboto Slab", serif;
+	height: 100vh;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+.test {
+	height: 100vh;
+}
+
+.header {
+	background: rgb(255, 111, 0);
+	border: var(--shadow);
+	color: white;
+	margin: 0;
+	padding-top: 1.5em;
+	height: 25vh;
+}
+
+.title {
+	color: var(--white);
+	font-weight: bold;
+}
+
+.explore-intro {
+	color: rgba(0, 0, 0, 0.722);
+	font-weight: bold;
+}
+
+.lead {
+	font-family: "Roboto Slab";
+	letter-spacing: 3px;
+}
+
+#landing {
+	margin: 0 !important;
+}
+
+.food-poster {
+	margin: 0;
+	padding: 0;
+	height: 75vh;
+	background-image: url("../images/temp/test.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: top left;
+}
+
+.intro {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 75vh;
+	background: rgba(255, 218, 184, 0.83);
+}
+
+.intro button {
+	margin: 2em auto;
+	background-color: rgb(255, 111, 0);
+	border-radius: 12px;
+	border: none;
+	width: 30%;
+	padding: 1.1em 0;
 }
