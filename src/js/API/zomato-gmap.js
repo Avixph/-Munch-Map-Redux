@@ -52,8 +52,6 @@ function giveLocation(position) {
         allCuisineItems[i].innerText = topCuisines[i];
       }
 
-      let resName;
-
       for (let item of geocode.data.nearby_restaurants) {
         if (typeof item.restaurant.price_range === 'number') {
           let numOfTimes = item.restaurant.price_range;
@@ -82,14 +80,6 @@ function giveLocation(position) {
       }
 
       let restaurantValues = Object.values(allRestaurants);
-      // console.log("Example restaurant:\n", restaurantValues[1]);
-
-      let cardSection = document.querySelector('.card-section');
-
-
-
-
-      console.log(`ASDASDIASDJAS`, restaurantValues);
 
       let restaurant = ({ RestaurantName, Score, ReviewText, Cuisine, AverageCost, PriceRange, FeaturedImg, Location }) => {
         return `
@@ -122,7 +112,7 @@ function giveLocation(position) {
         </div>`;
       };
 
-      // C:\Users\bxsha\Documents\Phase1-Redux\-Munch-Map-Redux\src\images\No-Image.png
+      let cardSection = document.querySelector('.card-section');
 
       for (let item of restaurantValues) {
         let resDiv = document.createElement('div');
@@ -132,37 +122,37 @@ function giveLocation(position) {
       }
       // COMMENT BELOW
       // DISPLAYING GMAPS JS API
-      // const script = document.createElement("script");
-      // script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
-      // script.defer = true;
-      // console.log(script);
+      const script = document.createElement("script");
+      script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
+      script.defer = true;
+      console.log(script);
 
-      // window.initMap = () => {
-      //   // GMAPS JS API IS LOADED AND AVAILABLE
-      //   const userLocation = { lat: latitude, lng: longitude };
-      //   const image =
-      //     "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
-      //   const map = new google.maps.Map(document.getElementById("map"), {
-      //     zoom: 14,
-      //     center: userLocation,
-      //   });
-      //   new google.maps.Marker({
-      //     position: userLocation,
-      //     map,
-      //     title: "munch map!",
-      //   });
+      window.initMap = () => {
+        // GMAPS JS API IS LOADED AND AVAILABLE
+        const userLocation = { lat: latitude, lng: longitude };
+        const image =
+          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 14,
+          center: userLocation,
+        });
+        new google.maps.Marker({
+          position: userLocation,
+          map,
+          title: "munch map!",
+        });
 
-      //   for (let item of restaurantValues) {
-      //     const marker = new google.maps.Marker({
-      //       position: item.ResCoordinates,
-      //       map,
-      //       icon: image,
-      //     });
-      //   }
-      // };
-      // // Append the 'script' element to 'head'
-      // document.head.appendChild(script);
-      // initMap();
+        for (let item of restaurantValues) {
+          const marker = new google.maps.Marker({
+            position: item.ResCoordinates,
+            map,
+            icon: image,
+          });
+        }
+      };
+      // Append the 'script' element to 'head'
+      document.head.appendChild(script);
+      initMap();
     } catch (e) {
       console.log("error", e);
     }
