@@ -163,8 +163,10 @@ a:hover {
 }
 
 /* SEARCH BAR CSS */
+
 .search {
-	width: 95%;
+	width: 50px;
+	margin-right: 2em;
 }
 
 .event__search__floater {
