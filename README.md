@@ -1,4 +1,5 @@
-# Munch-Map
+![Munch Map logo](src/images/logos/MM-Logo.svg)
+# Explore restaurants near you
 
 ## 🗺 About 📍
 
@@ -17,10 +18,10 @@ Munch Map is a platform where users can explore local restaurants and see them i
 
 ## 🛠 Wireframing 🛠
  [App concept from figma](https://www.figma.com/file/9HXuSGXvXWuvlRHAyXsm9u/Final-Project-P1-Munch-Map?node-id=0%3A1)
- | Logo                                                  |
- | ----------------------------------------------------- |
- | ![Munch Map Logo](src/images/logos/MunchMap-logo.png) |
- | Work in Progress                                      |
+ | Logo                                                  |                                                    |
+ | ----------------------------------------------------- | -------------------------------------------------- |
+ | ![Munch Map Logo](src/images/logos/MunchMap-logo.png) | ![Munch Map Logo](src/images/logos/MM-Logo-sm.png) |
+ | Work in Progress                                      |                                                    |
 
 | Desktop                                                         | Tablet                                                        | Mobile                                                        |
 | --------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
