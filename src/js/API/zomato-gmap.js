@@ -143,7 +143,7 @@ function giveLocation(position) {
                     <div class="d-flex align-items-center food-container">
                         <div class="col-12 text-center food-pic">
                   
-                            <img src="${FeaturedImg ? FeaturedImg : "https://thebattengroup.com/wp-content/uploads/2017/03/no-image-icon.png"}" alt="" /> 
+                            <img src="${FeaturedImg ? FeaturedImg : "https://cdn.discordapp.com/attachments/661356197768855554/785260477022208030/404-img.png"}" alt="" /> 
                             <h3><span class="info review">"${ReviewText}"</span></h3>
                         </div>
                     </div>
