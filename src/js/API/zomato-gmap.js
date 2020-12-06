@@ -14,7 +14,6 @@ let gMapKey = process.env.GMAP_KEY;
 navigator.geolocation.getCurrentPosition(giveLocation, error);
 
 function giveLocation(position) {
-
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
   console.log(latitude, longitude);
@@ -38,10 +37,12 @@ function giveLocation(position) {
       const allRestaurants = {};
 
       const subzone = `${geocode.data.popularity.subzone}, ${geocode.data.popularity.city}`;
-      let area = document.querySelector('.subzone');
+      let area = document.querySelector(".subzone");
       area.innerText = subzone;
 
-      const allCuisineItems = document.querySelectorAll('#cuisine-1, #cuisine-2, #cuisine-3, #cuisine-4, #cuisine-5');
+      const allCuisineItems = document.querySelectorAll(
+        "#cuisine-1, #cuisine-2, #cuisine-3, #cuisine-4, #cuisine-5"
+      );
 
       let topCuisines = geocode.data.popularity.top_cuisines.map(cuisine => {
         return cuisine;
@@ -52,11 +53,11 @@ function giveLocation(position) {
       }
 
       for (let item of geocode.data.nearby_restaurants) {
-        if (typeof item.restaurant.price_range === 'number') {
+        if (typeof item.restaurant.price_range === "number") {
           let numOfTimes = item.restaurant.price_range;
-          item.restaurant.price_range = '';
+          item.restaurant.price_range = "";
           for (let i = 0; i < numOfTimes; i++) {
-            item.restaurant.price_range += '$';
+            item.restaurant.price_range += "$";
           }
         }
 
@@ -75,12 +76,20 @@ function giveLocation(position) {
           FeaturedImg: item.restaurant.featured_image,
           Location: `${item.restaurant.location.address}`,
         };
-
       }
 
       let restaurantValues = Object.values(allRestaurants);
 
-      let restaurant = ({ RestaurantName, Score, ReviewText, Cuisine, AverageCost, PriceRange, FeaturedImg, Location }) => {
+      let restaurant = ({
+        RestaurantName,
+        Score,
+        ReviewText,
+        Cuisine,
+        AverageCost,
+        PriceRange,
+        FeaturedImg,
+        Location,
+      }) => {
         return `
         <div class="col-lg-10 col-md-12 col-sm-12 card-container">
             <h1 class="text-center res-name"><span class="info">${RestaurantName}</span></h1>
@@ -91,9 +100,15 @@ function giveLocation(position) {
                             <ul>
                                 <li>Cuisine: <span class="info">${Cuisine}</span></li>
                                 <li>Price range: <span class="info money">${PriceRange}</span></li>
-                                <li>Average cost for two: <span class="info">${Number(AverageCost) ? `$${AverageCost}` : `N/A`}</span></li>
+                                <li>Average cost for two: <span class="info">${
+                                  Number(AverageCost)
+                                    ? `$${AverageCost}`
+                                    : `N/A`
+                                }</span></li>
                                 <li>Location: <span class="info">${Location}</span></li>
-                                <li>Score: <span class="info">${Number(Score) ? `${Score} / 5.0` : `N/A`}</span></li>
+                                <li>Score: <span class="info">${
+                                  Number(Score) ? `${Score} / 5.0` : `N/A`
+                                }</span></li>
                             </ul>
                         </div>
                     </div>
@@ -102,7 +117,11 @@ function giveLocation(position) {
                     <div class="d-flex align-items-center food-container">
                         <div class="col-12 text-center food-pic">
                   
-                            <img src="${FeaturedImg ? FeaturedImg : 'https://thebattengroup.com/wp-content/uploads/2017/03/no-image-icon.png'}" alt="" /> 
+                            <img src="${
+                              FeaturedImg
+                                ? FeaturedImg
+                                : "https://thebattengroup.com/wp-content/uploads/2017/03/no-image-icon.png"
+                            }" alt="" /> 
                             <h3><span class="info review">"${ReviewText}"</span></h3>
                         </div>
                     </div>
@@ -111,11 +130,11 @@ function giveLocation(position) {
         </div>`;
       };
 
-      let cardSection = document.querySelector('.card-section');
+      let cardSection = document.querySelector(".card-section");
 
       for (let item of restaurantValues) {
-        let resDiv = document.createElement('div');
-        resDiv.classList.add('d-flex', 'justify-content-center');
+        let resDiv = document.createElement("div");
+        resDiv.classList.add("d-flex", "justify-content-center");
         resDiv.innerHTML = restaurant(item);
         cardSection.append(resDiv);
       }
