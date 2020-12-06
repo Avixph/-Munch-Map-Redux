@@ -101,7 +101,7 @@ a:hover {
 	border-radius: 12px;
 	filter: drop-shadow(1px 40px 20px #000000bb);
 	background: var(--peachpuff);
-	margin-bottom: 2em;
+	margin: 3em 0;
 	height: 1%;
 }
 
@@ -157,3 +157,5 @@ a:hover {
 	font-style: italic;
 	color: rgba(0, 0, 0, 0.253);
 }
+
+/* SEARCH BAR CSS */
