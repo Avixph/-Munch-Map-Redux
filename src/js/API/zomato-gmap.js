@@ -2,6 +2,7 @@ import axios from "axios";
 import { populateRestaurants } from '../populateRestaurants.js';
 import { getResData } from '../getResData.js';
 import { searchRemove } from '../scrollSearch.js';
+import { showSearchMarkers } from './gmaps.js';
 
 let ZOMATO_KEY = process.env.ZOMATO_KEY;
 let ZOMATO_URL = process.env.ZOMATO_URL;
@@ -29,6 +30,7 @@ function giveLocation(position) {
   // GET LAT AND LONG
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
+  const userLocation = { lat: latitude, lng: longitude };
 
   // ASYNC FUNCTION START FOR API CALLS
   async function getData() {
@@ -88,6 +90,8 @@ function giveLocation(position) {
 
       appendRestaurants();
 
+      let resGeoCodeArr = getResData(geocode.data.nearby_restaurants);
+
       //  ADD SEARCH RESULT ITEMS HERE
       const searchForm = document.querySelector('.search');
 
@@ -102,6 +106,8 @@ function giveLocation(position) {
 
           if (e.keyCode === 13) {
             const search = await axios.get(`https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`, config);
+
+            showSearchMarkers(getResData(search.data.restaurants), userLocation);
 
             function appendRestaurants() {
               const cardContainer = document.querySelectorAll('.card-container');
@@ -131,9 +137,8 @@ function giveLocation(position) {
       script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
       script.defer = true;
 
-      window.initMap = function () {
+      window.initMap = async () => {
         // GMAPS JS API IS LOADED AND AVAILABLE
-        const userLocation = { lat: latitude, lng: longitude };
         const image =
           "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
         const map = new google.maps.Map(document.getElementById("map"), {
@@ -146,7 +151,7 @@ function giveLocation(position) {
           title: "munch map!",
         });
 
-        for (let item of getResData(geocode.data.nearby_restaurants)) {
+        for (let item of await resGeoCodeArr) {
           const marker = new google.maps.Marker({
             position: item.ResCoordinates,
             map,
@@ -154,9 +159,8 @@ function giveLocation(position) {
           });
         }
       };
-      // Append the 'script' element to 'head'
 
-      initMap();
+      // Append the 'script' element to 'head'
       document.head.appendChild(script);
 
     } catch (e) {
