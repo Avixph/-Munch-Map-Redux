@@ -19,12 +19,6 @@ cardsec.onscroll = function () {
   searchRemove();
 };
 
-cardsec.onscroll = function () {
-  searchRemove();
-};
-
-searchRemove();
-
 // IF USER ALLOWS LOCATION
 function giveLocation(position) {
   // GET LAT AND LONG
