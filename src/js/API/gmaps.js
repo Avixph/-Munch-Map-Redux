@@ -1,6 +1,6 @@
 export function showSearchMarkers(arr, position) {
   const image =
-    "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/d9f5320ac16d436d1f0acf174b0cdb7071651b88/src/images/icons/MM-Icon.svg";
+    "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/3c1437507a08970278c7fd1253e1726a4b7470f8/src/images/icons/MM-Icon-sm.svg";
   let map;
   map = new google.maps.Map(document.getElementById("map"), {
     center: position,
