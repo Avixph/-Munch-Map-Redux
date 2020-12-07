@@ -1,6 +1,7 @@
 import axios from "axios";
 import { populateRestaurants } from '../populateRestaurants.js';
 import { getResData } from '../getResData.js';
+import { searchRemove } from '../scrollSearch.js';
 
 let ZOMATO_KEY = process.env.ZOMATO_KEY;
 let ZOMATO_URL = process.env.ZOMATO_URL;
@@ -17,17 +18,11 @@ cardsec.onscroll = function () {
   searchRemove();
 };
 
-function searchRemove() {
-  const searchBtn = document.querySelector(".search");
-  if (document.querySelector(".card-section").scrollTop > 120) {
-    searchBtn.classList.add("blurred");
-  } else if (document.querySelector(".card-section").scrollTop === 0) {
-    searchBtn.classList.remove("blurred");
-  }
-  searchBtn.addEventListener('click', () => {
-    searchBtn.classList.remove('blurred');
-  });
-}
+cardsec.onscroll = function () {
+  searchRemove();
+};
+
+searchRemove();
 
 // IF USER ALLOWS LOCATION
 function giveLocation(position) {
@@ -136,37 +131,38 @@ function giveLocation(position) {
 
 
       // DISPLAYING GMAPS JS API
-      // const script = document.createElement("script");
-      // script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
-      // script.defer = true;
-      // console.log(script);
+      const script = document.createElement("script");
+      script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
+      script.defer = true;
+      console.log(script);
 
-      // window.initMap = () => {
-      //   // GMAPS JS API IS LOADED AND AVAILABLE
-      //   const userLocation = { lat: latitude, lng: longitude };
-      //   const image =
-      //     "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
-      //   const map = new google.maps.Map(document.getElementById("map"), {
-      //     zoom: 14,
-      //     center: userLocation,
-      //   });
-      //   new google.maps.Marker({
-      //     position: userLocation,
-      //     map,
-      //     title: "munch map!",
-      //   });
+      window.initMap = () => {
+        // GMAPS JS API IS LOADED AND AVAILABLE
+        const userLocation = { lat: latitude, lng: longitude };
+        const image =
+          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 14,
+          center: userLocation,
+        });
+        new google.maps.Marker({
+          position: userLocation,
+          map,
+          title: "munch map!",
+        });
 
-      //   for (let item of restaurantValues) {
-      //     const marker = new google.maps.Marker({
-      //       position: item.ResCoordinates,
-      //       map,
-      //       icon: image,
-      //     });
-      //   }
-      // };
-      // // Append the 'script' element to 'head'
-      // document.head.appendChild(script);
-      // initMap();
+        for (let item of getResData(geocode.data.nearby_restaurants)) {
+          const marker = new google.maps.Marker({
+            position: item.ResCoordinates,
+            map,
+            icon: image,
+          });
+        }
+      };
+      // Append the 'script' element to 'head'
+
+      initMap();
+      document.head.appendChild(script);
 
     } catch (e) {
       console.log("error", e);
