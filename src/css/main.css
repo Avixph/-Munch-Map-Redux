@@ -1,16 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;400;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
+/* font-family: 'Rubik', sans-serif; */
 :root {
 	--marigold: #e6a42e;
 	--darkorange: rgb(255, 111, 0);
-	--white: #F3F2E9;
+	--white: #f3f2e9;
 	--babyblue: #b1d2f0;
 	--peachpuff: #ffda8b;
 	--grayish: #616161;
 	--rajah: #f7b06d;
 	--shadow: 6px 6px 9px #ffffff31, -6px -6px 9px #00000013;
 	--shadow-inset: inset 6px 6px 9px #00000031, inset -6px -6px 9px #a3a0a025;
-	--font: "Roboto Slab", serif;
+	--font: "Rubik", sans-serif;
 }
 
 .blurred {
@@ -42,6 +42,12 @@ a:hover {
 	margin: 0;
 	padding-top: 1.5em;
 	height: 25vh;
+}
+
+@media only screen and (max-width: 600px) {
+	#logo {
+		height: 100px;
+	}
 }
 
 .title {
@@ -150,6 +156,7 @@ a:hover {
 
 .info {
 	font-size: 1.1em;
+	font-weight: 400;
 	color: rgba(0, 0, 0, 0.679);
 }
 
