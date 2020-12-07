@@ -131,7 +131,7 @@ function giveLocation(position) {
       script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
       script.defer = true;
 
-      window.initMap = () => {
+      window.initMap = function () {
         // GMAPS JS API IS LOADED AND AVAILABLE
         const userLocation = { lat: latitude, lng: longitude };
         const image =
