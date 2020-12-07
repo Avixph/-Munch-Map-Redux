@@ -1,9 +1,4 @@
-const script = document.createElement("script");
-script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
-script.defer = true;
-console.log(script);
-
-window.initMap = () => {
+const initMap = () => {
     // GMAPS JS API IS LOADED AND AVAILABLE
     const userLocation = { lat: latitude, lng: longitude };
     const image =
@@ -27,5 +22,6 @@ window.initMap = () => {
     }
 };
 // Append the 'script' element to 'head'
-document.head.appendChild(script);
-initMap();
+
+
+export { initMap };

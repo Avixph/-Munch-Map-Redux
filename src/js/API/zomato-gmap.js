@@ -1,12 +1,6 @@
 import axios from "axios";
-import { restaurantNearby } from '../nearbyResults.js';
-import { restaurantSearch } from '../searchResults.js';
-
-if (navigator.geolocation) {
-  console.log("Geolocation is supported!");
-} else {
-  console.log("Geolocation is not supported for this Browser/OS version yet.");
-}
+import { populateRestaurants } from '../populateRestaurants.js';
+import { getResData } from '../getResData.js';
 
 let ZOMATO_KEY = process.env.ZOMATO_KEY;
 let ZOMATO_URL = process.env.ZOMATO_URL;
@@ -60,9 +54,6 @@ function giveLocation(position) {
 
       // GETTING SEARCH RESULTS FOR ZOMATO - SORTED BY RATING
       const searchInput = document.querySelector('.search__bar');
-      const search = await axios.get(`https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`, config);
-
-      console.log(search);
 
       // DISPLAY WHAT AREA THE USER IS IN
       const subzone = `${geocode.data.popularity.subzone}`;
@@ -84,106 +75,30 @@ function giveLocation(position) {
         allCuisineItems[i].innerText = topCuisines[i];
       }
 
-      const allRestaurants = {};
-      let searchResults = {};
-
-      // CHANGE NUMBER TO DOLLAR SIGNS FOR PRICE RANGE
-
-      for (let item of geocode.data.nearby_restaurants) {
-        if (typeof item.restaurant.price_range === "number") {
-          let numOfTimes = item.restaurant.price_range;
-          item.restaurant.price_range = "";
-          for (let i = 0; i < numOfTimes; i++) {
-            item.restaurant.price_range += "$";
-          }
-        }
-
-        // OBJECT THAT CONTAINS ALL OF OUR DATA
-        allRestaurants[item.restaurant.name] = {
-          ResCoordinates: {
-            lat: Number(item.restaurant.location.latitude),
-            lng: Number(item.restaurant.location.longitude),
-          },
-
-          RestaurantName: item.restaurant.name,
-          Score: `${item.restaurant.user_rating.aggregate_rating}`,
-          ReviewText: `${item.restaurant.user_rating.rating_text}`,
-          Cuisine: item.restaurant.cuisines,
-          AverageCost: `${item.restaurant.average_cost_for_two}`,
-          PriceRange: `${item.restaurant.price_range}`,
-          FeaturedImg: item.restaurant.featured_image,
-          Location: `${item.restaurant.location.address}`,
-        };
-      }
-
-
-      for (let item of search.data.restaurants) {
-        if (typeof item.restaurant.price_range === "number") {
-          let numOfTimes = item.restaurant.price_range;
-          item.restaurant.price_range = "";
-          for (let i = 0; i < numOfTimes; i++) {
-            item.restaurant.price_range += "$";
-          }
-        }
-
-
-        // OBJECT THAT CONTAINS ALL OF OUR DATA
-        searchResults[item.restaurant.name] = {
-          ResCoordinates: {
-            lat: Number(item.restaurant.location.latitude),
-            lng: Number(item.restaurant.location.longitude),
-          },
-
-          RestaurantName: item.restaurant.name,
-          Score: `${item.restaurant.user_rating.aggregate_rating}`,
-          ReviewText: `${item.restaurant.user_rating.rating_text}`,
-          Cuisine: item.restaurant.cuisines,
-          AverageCost: `${item.restaurant.average_cost_for_two}`,
-          PriceRange: `${item.restaurant.price_range}`,
-          FeaturedImg: item.restaurant.featured_image,
-          Location: `${item.restaurant.location.address}`,
-        };
-      }
-
-      let restaurantValues = Object.values(allRestaurants);
-      let searchRestaurantValues = Object.values(searchResults);
-
-      console.log(searchRestaurantValues);
-
-      // FUNCTION THAT RETURNS A NEW CARD WITH RESTAURANT INFO
       let cardSection = document.querySelector(".card-section");
 
       // APPENDING NEW RESTAURANT CARDS TO OUR DOM
-      function populateNearbyRestaurants() {
+      function appendRestaurants() {
         const cardContainer = document.querySelectorAll('.card-container');
         for (let div of cardContainer) {
           div.remove();
         }
-        for (let item of restaurantValues) {
+        for (let item of getResData(geocode.data.nearby_restaurants)) {
           let resDiv = document.createElement("div");
           resDiv.classList.add("d-flex", "justify-content-center");
-          resDiv.innerHTML = restaurantNearby(item);
+          resDiv.innerHTML = populateRestaurants(item);
           cardSection.append(resDiv);
         }
       }
 
-      populateNearbyRestaurants();
-
-      function populateRestaurant() {
-        for (let item of searchRestaurantValues) {
-          let resDiv = document.createElement("div");
-          resDiv.classList.add("d-flex", "justify-content-center");
-          resDiv.innerHTML = restaurantSearch(item);
-          cardSection.append(resDiv);
-        }
-      }
+      appendRestaurants();
 
       //  ADD SEARCH RESULT ITEMS HERE
       const searchForm = document.querySelector('.search');
 
       searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        searchInput.addEventListener('keyup', (e) => {
+        searchInput.addEventListener('keyup', async (e) => {
 
           const cardContainer = document.querySelectorAll('.card-container');
           for (let div of cardContainer) {
@@ -191,6 +106,24 @@ function giveLocation(position) {
           }
 
           if (e.keyCode === 13) {
+
+            const search = await axios.get(`https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`, config);
+
+            function appendRestaurants() {
+              const cardContainer = document.querySelectorAll('.card-container');
+              for (let div of cardContainer) {
+                div.remove();
+              }
+              for (let item of getResData(search.data.restaurants)) {
+                let resDiv = document.createElement("div");
+                resDiv.classList.add("d-flex", "justify-content-center");
+                resDiv.innerHTML = populateRestaurants(item);
+                cardSection.append(resDiv);
+              }
+            }
+
+            appendRestaurants();
+
             const city = `${geocode.data.location.city_name}`;
             let area = document.querySelector(".subzone");
             area.innerText = city;
