@@ -1,8 +1,8 @@
 import axios from "axios";
-import { populateRestaurants } from '../populateRestaurants.js';
-import { getResData } from '../getResData.js';
-import { searchRemove } from '../scrollSearch.js';
-import { showSearchMarkers } from './gmaps.js';
+import { populateRestaurants } from "../populateRestaurants.js";
+import { getResData } from "../getResData.js";
+import { searchRemove } from "../scrollSearch.js";
+import { showSearchMarkers } from "./gmaps.js";
 
 let ZOMATO_KEY = process.env.ZOMATO_KEY;
 let ZOMATO_URL = process.env.ZOMATO_URL;
@@ -13,7 +13,7 @@ let gMapKey = process.env.GMAP_KEY;
 navigator.geolocation.getCurrentPosition(giveLocation, error);
 
 // SEARCH
-const cardsec = document.querySelector('.card-section');
+const cardsec = document.querySelector(".card-section");
 
 cardsec.onscroll = function () {
   searchRemove();
@@ -35,7 +35,6 @@ function giveLocation(position) {
   // ASYNC FUNCTION START FOR API CALLS
   async function getData() {
     try {
-
       const config = {
         headers: {
           Accept: "application/json",
@@ -50,7 +49,7 @@ function giveLocation(position) {
       );
 
       // GETTING SEARCH RESULTS FOR ZOMATO - SORTED BY RATING
-      const searchInput = document.querySelector('.search__bar');
+      const searchInput = document.querySelector(".search__bar");
 
       // DISPLAY WHAT AREA THE USER IS IN
       const subzone = `${geocode.data.popularity.subzone}`;
@@ -63,7 +62,7 @@ function giveLocation(position) {
       );
 
       // THE TOP CUISINES ARRAY
-      let topCuisines = geocode.data.popularity.top_cuisines.map(cuisine => {
+      let topCuisines = geocode.data.popularity.top_cuisines.map((cuisine) => {
         return cuisine;
       });
 
@@ -76,7 +75,7 @@ function giveLocation(position) {
 
       // APPENDING NEW RESTAURANT CARDS TO OUR DOM
       function appendRestaurants() {
-        const cardContainer = document.querySelectorAll('.card-container');
+        const cardContainer = document.querySelectorAll(".card-container");
         for (let div of cardContainer) {
           div.remove();
         }
@@ -93,24 +92,31 @@ function giveLocation(position) {
       let resGeoCodeArr = getResData(geocode.data.nearby_restaurants);
 
       //  ADD SEARCH RESULT ITEMS HERE
-      const searchForm = document.querySelector('.search');
+      const searchForm = document.querySelector(".search");
 
-      searchForm.addEventListener('submit', (e) => {
+      searchForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        searchInput.addEventListener('keyup', async (e) => {
-
-          const cardContainer = document.querySelectorAll('.card-container');
+        searchInput.addEventListener("keyup", async (e) => {
+          const cardContainer = document.querySelectorAll(".card-container");
           for (let div of cardContainer) {
             div.remove();
           }
 
           if (e.keyCode === 13) {
-            const search = await axios.get(`https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`, config);
+            const search = await axios.get(
+              `https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`,
+              config
+            );
 
-            showSearchMarkers(getResData(search.data.restaurants), userLocation);
+            showSearchMarkers(
+              getResData(search.data.restaurants),
+              userLocation
+            );
 
             function appendRestaurants() {
-              const cardContainer = document.querySelectorAll('.card-container');
+              const cardContainer = document.querySelectorAll(
+                ".card-container"
+              );
               for (let div of cardContainer) {
                 div.remove();
               }
@@ -131,7 +137,6 @@ function giveLocation(position) {
         });
       });
 
-
       // DISPLAYING GMAPS JS API
       const script = document.createElement("script");
       script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
@@ -140,7 +145,7 @@ function giveLocation(position) {
       window.initMap = async () => {
         // GMAPS JS API IS LOADED AND AVAILABLE
         const image =
-          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
+          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/d9f5320ac16d436d1f0acf174b0cdb7071651b88/src/images/icons/MM-Icon.svg";
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 14,
           center: userLocation,
@@ -162,7 +167,6 @@ function giveLocation(position) {
 
       // Append the 'script' element to 'head'
       document.head.appendChild(script);
-
     } catch (e) {
       console.log("error", e);
     }
