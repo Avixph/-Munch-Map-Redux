@@ -1,6 +1,6 @@
 import axios from "axios";
-import { restaurantNearby } from '../nearbyResults.js';
-import { restaurantSearch } from '../searchResults.js';
+import { restaurantNearby } from "../nearbyResults.js";
+import { restaurantSearch } from "../searchResults.js";
 
 if (navigator.geolocation) {
   console.log("Geolocation is supported!");
@@ -17,7 +17,7 @@ let gMapKey = process.env.GMAP_KEY;
 navigator.geolocation.getCurrentPosition(giveLocation, error);
 
 // SEARCH
-const cardsec = document.querySelector('.card-section');
+const cardsec = document.querySelector(".card-section");
 
 cardsec.onscroll = function () {
   searchRemove();
@@ -30,8 +30,8 @@ function searchRemove() {
   } else if (document.querySelector(".card-section").scrollTop === 0) {
     searchBtn.classList.remove("blurred");
   }
-  searchBtn.addEventListener('click', () => {
-    searchBtn.classList.remove('blurred');
+  searchBtn.addEventListener("click", () => {
+    searchBtn.classList.remove("blurred");
   });
 }
 
@@ -44,7 +44,6 @@ function giveLocation(position) {
   // ASYNC FUNCTION START FOR API CALLS
   async function getData() {
     try {
-
       const config = {
         headers: {
           Accept: "application/json",
@@ -59,8 +58,11 @@ function giveLocation(position) {
       );
 
       // GETTING SEARCH RESULTS FOR ZOMATO - SORTED BY RATING
-      const searchInput = document.querySelector('.search__bar');
-      const search = await axios.get(`https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`, config);
+      const searchInput = document.querySelector(".search__bar");
+      const search = await axios.get(
+        `https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`,
+        config
+      );
 
       console.log(search);
 
@@ -75,7 +77,7 @@ function giveLocation(position) {
       );
 
       // THE TOP CUISINES ARRAY
-      let topCuisines = geocode.data.popularity.top_cuisines.map(cuisine => {
+      let topCuisines = geocode.data.popularity.top_cuisines.map((cuisine) => {
         return cuisine;
       });
 
@@ -116,7 +118,6 @@ function giveLocation(position) {
         };
       }
 
-
       for (let item of search.data.restaurants) {
         if (typeof item.restaurant.price_range === "number") {
           let numOfTimes = item.restaurant.price_range;
@@ -125,7 +126,6 @@ function giveLocation(position) {
             item.restaurant.price_range += "$";
           }
         }
-
 
         // OBJECT THAT CONTAINS ALL OF OUR DATA
         searchResults[item.restaurant.name] = {
@@ -155,7 +155,7 @@ function giveLocation(position) {
 
       // APPENDING NEW RESTAURANT CARDS TO OUR DOM
       function populateNearbyRestaurants() {
-        const cardContainer = document.querySelectorAll('.card-container');
+        const cardContainer = document.querySelectorAll(".card-container");
         for (let div of cardContainer) {
           div.remove();
         }
@@ -179,13 +179,12 @@ function giveLocation(position) {
       }
 
       //  ADD SEARCH RESULT ITEMS HERE
-      const searchForm = document.querySelector('.search');
+      const searchForm = document.querySelector(".search");
 
-      searchForm.addEventListener('submit', (e) => {
+      searchForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        searchInput.addEventListener('keyup', (e) => {
-
-          const cardContainer = document.querySelectorAll('.card-container');
+        searchInput.addEventListener("keyup", (e) => {
+          const cardContainer = document.querySelectorAll(".card-container");
           for (let div of cardContainer) {
             div.remove();
           }
@@ -200,41 +199,38 @@ function giveLocation(position) {
         });
       });
 
-
-
       // DISPLAYING GMAPS JS API
-      // const script = document.createElement("script");
-      // script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
-      // script.defer = true;
-      // console.log(script);
+      const script = document.createElement("script");
+      script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
+      script.defer = true;
+      console.log(script);
 
-      // window.initMap = () => {
-      //   // GMAPS JS API IS LOADED AND AVAILABLE
-      //   const userLocation = { lat: latitude, lng: longitude };
-      //   const image =
-      //     "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
-      //   const map = new google.maps.Map(document.getElementById("map"), {
-      //     zoom: 14,
-      //     center: userLocation,
-      //   });
-      //   new google.maps.Marker({
-      //     position: userLocation,
-      //     map,
-      //     title: "munch map!",
-      //   });
+      window.initMap = () => {
+        // GMAPS JS API IS LOADED AND AVAILABLE
+        const userLocation = { lat: latitude, lng: longitude };
+        const image =
+          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 14,
+          center: userLocation,
+        });
+        new google.maps.Marker({
+          position: userLocation,
+          map,
+          title: "munch map!",
+        });
 
-      //   for (let item of restaurantValues) {
-      //     const marker = new google.maps.Marker({
-      //       position: item.ResCoordinates,
-      //       map,
-      //       icon: image,
-      //     });
-      //   }
-      // };
-      // // Append the 'script' element to 'head'
-      // document.head.appendChild(script);
-      // initMap();
-
+        for (let item of restaurantValues) {
+          const marker = new google.maps.Marker({
+            position: item.ResCoordinates,
+            map,
+            icon: image,
+          });
+        }
+      };
+      // Append the 'script' element to 'head'
+      document.head.appendChild(script);
+      initMap();
     } catch (e) {
       console.log("error", e);
     }
