@@ -1,13 +1,11 @@
-const restaurantNearby = ({
-    RestaurantName,
+function populateRestaurants({ RestaurantName,
     Score,
     ReviewText,
     Cuisine,
     AverageCost,
     PriceRange,
     FeaturedImg,
-    Location,
-}) => {
+    Location }) {
     return `
     <div class="col-lg-10 col-md-12 col-sm-12 card-container">
         <h1 class="text-center res-name">${RestaurantName}</h1>
@@ -40,6 +38,7 @@ const restaurantNearby = ({
 
 
 
-export { restaurantNearby };
+
+export { populateRestaurants };
 
 
