@@ -101,7 +101,6 @@ function giveLocation(position) {
           }
 
           if (e.keyCode === 13) {
-
             const search = await axios.get(`https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`, config);
 
             function appendRestaurants() {
@@ -122,8 +121,6 @@ function giveLocation(position) {
             const city = `${geocode.data.location.city_name}`;
             let area = document.querySelector(".subzone");
             area.innerText = city;
-
-            populateRestaurant();
           }
         });
       });
@@ -134,7 +131,6 @@ function giveLocation(position) {
       const script = document.createElement("script");
       script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
       script.defer = true;
-      console.log(script);
 
       window.initMap = () => {
         // GMAPS JS API IS LOADED AND AVAILABLE
