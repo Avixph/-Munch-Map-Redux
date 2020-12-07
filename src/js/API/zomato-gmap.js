@@ -126,7 +126,6 @@ function giveLocation(position) {
       });
 
 
-
       // DISPLAYING GMAPS JS API
       const script = document.createElement("script");
       script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
