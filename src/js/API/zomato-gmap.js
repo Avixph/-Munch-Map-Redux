@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { populateRestaurants } from '../populateRestaurants.js';
 import { getResData } from '../getResData.js';
 import { searchRemove } from '../scrollSearch.js';
@@ -13,11 +14,12 @@ let gMapKey = process.env.GMAP_KEY;
 navigator.geolocation.getCurrentPosition(giveLocation, error);
 
 // SEARCH
-const cardsec = document.querySelector('.card-section');
+const cardsec = document.querySelector(".card-section");
 
 cardsec.onscroll = function () {
   searchRemove();
 };
+
 
 cardsec.onscroll = function () {
   searchRemove();
@@ -35,7 +37,6 @@ function giveLocation(position) {
   // ASYNC FUNCTION START FOR API CALLS
   async function getData() {
     try {
-
       const config = {
         headers: {
           Accept: "application/json",
@@ -63,7 +64,7 @@ function giveLocation(position) {
       );
 
       // THE TOP CUISINES ARRAY
-      let topCuisines = geocode.data.popularity.top_cuisines.map(cuisine => {
+      let topCuisines = geocode.data.popularity.top_cuisines.map((cuisine) => {
         return cuisine;
       });
 
@@ -77,6 +78,7 @@ function giveLocation(position) {
       // APPENDING NEW RESTAURANT CARDS TO OUR DOM
       function appendRestaurants() {
         const cardContainer = document.querySelectorAll('.card-container');
+
         for (let div of cardContainer) {
           div.remove();
         }
@@ -93,13 +95,15 @@ function giveLocation(position) {
       let resGeoCodeArr = getResData(geocode.data.nearby_restaurants);
 
       //  ADD SEARCH RESULT ITEMS HERE
-      const searchForm = document.querySelector('.search');
+      const searchForm = document.querySelector(".search");
 
-      searchForm.addEventListener('submit', (e) => {
+      searchForm.addEventListener("submit", (e) => {
         e.preventDefault();
+
         searchInput.addEventListener('keyup', async (e) => {
 
           const cardContainer = document.querySelectorAll('.card-container');
+
           for (let div of cardContainer) {
             div.remove();
           }
@@ -132,6 +136,7 @@ function giveLocation(position) {
       });
 
 
+
       // DISPLAYING GMAPS JS API
       const script = document.createElement("script");
       script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
@@ -139,6 +144,7 @@ function giveLocation(position) {
 
       window.initMap = async () => {
         // GMAPS JS API IS LOADED AND AVAILABLE
+
         const image =
           "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/developer/src/images/logos/flag.png";
         const map = new google.maps.Map(document.getElementById("map"), {
@@ -163,6 +169,17 @@ function giveLocation(position) {
       // Append the 'script' element to 'head'
       document.head.appendChild(script);
 
+        for (let item of restaurantValues) {
+          const marker = new google.maps.Marker({
+            position: item.ResCoordinates,
+            map,
+            icon: image,
+          });
+        }
+      };
+      // Append the 'script' element to 'head'
+      document.head.appendChild(script);
+      initMap();
     } catch (e) {
       console.log("error", e);
     }
