@@ -21,7 +21,7 @@ Munch Map is a platform where users can explore local restaurants and see them i
  | Logo                                                  |                                                    |
  | ----------------------------------------------------- | -------------------------------------------------- |
  | ![Munch Map Logo](src/images/logos/MunchMap-logo.png) | ![Munch Map Logo](src/images/logos/MM-Logo-sm.png) |
- | Work in Progress                                      |                                                    |
+ | Work in Progress                                      | final                                              |
 
 | Desktop                                                         | Tablet                                                        | Mobile                                                        |
 | --------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
