@@ -15,6 +15,9 @@ navigator.geolocation.getCurrentPosition(giveLocation, error);
 // SEARCH
 const cardsec = document.querySelector(".card-section");
 
+//PROCEED TO THE RESTAURANT PAGE
+const proceed = document.querySelector("#proceed");
+
 cardsec.onscroll = function () {
   searchRemove();
 };
@@ -25,6 +28,8 @@ function giveLocation(position) {
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
   const userLocation = { lat: latitude, lng: longitude };
+
+  proceed.setAttribute("href", "main.html");
 
   // ASYNC FUNCTION START FOR API CALLS
   async function getData() {
@@ -168,7 +173,6 @@ function giveLocation(position) {
   getData();
 }
 function error(message) {
-  const proceed = document.querySelector('#proceed');
-  proceed.setAttribute('href', '#');
-  alert('Please give location access first!');
+  proceed.setAttribute("href", "404.html");
+  // alert('Please give location access first!');
 }
