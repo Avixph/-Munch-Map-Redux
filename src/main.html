@@ -1,107 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO0hrypPN3AF5amqP4-STf8568F8Z-rnY&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
-    <title>MunchMap!</title>
-    <link rel="Munch Map icon" href="../src/images/icons/MM-Icon-lg.svg" />
-    <link rel="stylesheet" href="../src/css/main.css" />
-  </head>
-  <body>
-    <!-- HEADER -->
-    <div class="d-flex justify-content-center header">
-      <div class="container">
-        <h1 class="text-center">
-          <img
-            id="logo"
-            src="images/logos/MM-Logo.svg"
-            height="150px"
-            width="auto"
-            alt=""
-          />
-        </h1>
-        <!-- <h1 class="title display-4 text-center"><a href="index.html">MunchMap</a></h1> -->
-      </div>
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-        <!-- MAP COLUMN -->
-        <div class="col-lg-3 col-md-12 col-sm-12 map-col">
-          <div id="map"></div>
-          <h2 class="font-weight-bold subzone"></h2>
-          <div class="subzone" class="d-flex flex-column">
-            <h4>Top Cuisines</h4>
-            <div class="d-flex justify-content-around flex-wrap cuisine-list">
-              <div class="col-4 cuisine-item">
-                <p id="cuisine-1"></p>
-              </div>
-              <div class="col-4 cuisine-item">
-                <p id="cuisine-2"></p>
-              </div>
-              <div class="col-4 cuisine-item">
-                <p id="cuisine-3"></p>
-              </div>
-              <div class="col-4 cuisine-item">
-                <p id="cuisine-4"></p>
-              </div>
-              <div class="col-4 cuisine-item">
-                <p id="cuisine-5"></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- CARD COLUMN -->
-        <div class="container-fluid col-lg-9 col-md-12 col-sm-12 card-section">
-          <!-- Search form -->
-          <form
-            class="sticky-top col-lg-12 col-md-12 col-sm-12 form-inline container-fluid d-flex justify-content-center search"
-          >
-            <div class="event__search__floater">
-              <div class="search__anchor">
-                <form id="event-search-form" action="get">
-                  <input
-                    type="text"
-                    class="search__bar"
-                    placeholder="Search a cuisine..."
-                  />
-                  <input class="search__submit" type="submit" />
-                  <div class="search__toggler"></div>
-                </form>
-              </div>
-            </div>
-          </form>
-          <!-- CONSTRUCTOR DOWN -->
-          <!-- CONSTRUCTOR UP -->
-        </div>
-      </div>
-    </div>
-    <!-- <script src="app.js"></script> -->
-    <script src="../src/js/API/zomato-gmap.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="../src/css/main.css" />
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO0hrypPN3AF5amqP4-STf8568F8Z-rnY&callback=initMap&libraries=&v=weekly"
+			defer
+		></script>
+		<title>MunchMap!</title>
+		<link rel="Munch Map icon" href="../src/images/icons/MM-Icon-lg.svg" />
+	</head>
+	<body>
+		<!-- HEADER -->
+		<div class="d-flex justify-content-center header">
+			<div class="container">
+				<h1 class="text-center">
+					<a href="index.html"><img id="logo" src="images/logos/MM-Logo.svg" height="150px" width="auto" alt="" /></a>
+				</h1>
+				<!-- <h1 class="title display-4 text-center"><a href="index.html">MunchMap</a></h1> -->
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- MAP COLUMN -->
+				<div class="col-lg-3 col-md-12 col-sm-12 map-col">
+					<div id="map"></div>
+					<h2 class="font-weight-bold subzone"></h2>
+					<div class="subzone" class="d-flex flex-column">
+						<h4>Top Cuisines</h4>
+						<div class="d-flex justify-content-around flex-wrap cuisine-list">
+							<div class="col-4 cuisine-item">
+								<p id="cuisine-1"></p>
+							</div>
+							<div class="col-4 cuisine-item">
+								<p id="cuisine-2"></p>
+							</div>
+							<div class="col-4 cuisine-item">
+								<p id="cuisine-3"></p>
+							</div>
+							<div class="col-4 cuisine-item">
+								<p id="cuisine-4"></p>
+							</div>
+							<div class="col-4 cuisine-item">
+								<p id="cuisine-5"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- CARD COLUMN -->
+				<div class="container-fluid col-lg-9 col-md-12 col-sm-12 card-section">
+					<!-- Search form -->
+					<form class="sticky-top col-lg-12 col-md-12 col-sm-12 form-inline container-fluid d-flex justify-content-center search">
+						<div class="event__search__floater">
+							<div class="search__anchor">
+								<form id="event-search-form" action="get">
+									<input type="text" class="search__bar" placeholder="Search a cuisine..." />
+									<input class="search__submit" type="submit" />
+									<div class="search__toggler"></div>
+								</form>
+							</div>
+						</div>
+					</form>
+					<!-- CONSTRUCTOR DOWN -->
+					<!-- CONSTRUCTOR UP -->
+				</div>
+			</div>
+		</div>
+		<!-- <script src="app.js"></script> -->
+		<script src="../src/js/API/zomato-gmap.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+	</body>
 </html>
