@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
+/* font-family: 'Rubik', sans-serif; */
+:root {
+  --marigold: #e6a42e;
+  --darkorange: rgb(255, 111, 0);
+  --white: #f3f2e9;
+  --babyblue: #b1d2f0;
+  --peachpuff: #ffda8b;
+  --grayish: #616161;
+  --rajah: #f7b06d;
+  --shadow: 6px 6px 9px #ffffff31, -6px -6px 9px #00000013;
+  --shadow-inset: inset 6px 6px 9px #00000031, inset -6px -6px 9px #a3a0a025;
+  --font: "Rubik", sans-serif;
+}
+
+body {
+  background: var(--darkorange);
+  /* background-image: ; */
+}
+.page-wrap {
+  min-height: 100vh;
+}
