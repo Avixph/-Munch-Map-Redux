@@ -168,5 +168,7 @@ function giveLocation(position) {
   getData();
 }
 function error(message) {
-  console.log("user declined location access");
+  const proceed = document.querySelector('#proceed');
+  proceed.setAttribute('href', '#');
+  alert('Please give location access first!');
 }
