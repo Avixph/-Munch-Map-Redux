@@ -5,12 +5,7 @@ import { searchRemove } from "../scrollSearch.js";
 import { showSearchMarkers } from "./gmaps.js";
 import { filterSearch } from '../filterSearch.js';
 import { appendRestaurants } from '../appendRestaurants.js';
-import { config } from '../config.js';
-
-let ZOMATO_KEY = process.env.ZOMATO_KEY;
-let ZOMATO_URL = process.env.ZOMATO_URL;
-let gMapUrl = process.env.GMAP_URL;
-let gMapKey = process.env.GMAP_KEY;
+import { config, ZOMATO_URL, gMapUrl, gMapKey } from '../config.js';
 
 // GEOLOCATION CALL
 navigator.geolocation.getCurrentPosition(giveLocation, error);
