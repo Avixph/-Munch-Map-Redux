@@ -20,13 +20,6 @@ navigator.permissions.query({ name: 'geolocation' })
     };
   });
 
-// SEARCH
-const cardsec = document.querySelector(".card-section");
-
-cardsec.onscroll = function () {
-  searchRemove();
-};
-
 // IF USER ALLOWS LOCATION
 function giveLocation(position) {
   // GET LAT AND LONG
@@ -75,8 +68,16 @@ function giveLocation(position) {
       const searchInput = document.querySelector(".search__bar");
       const searchForm = document.querySelector(".search");
 
+      // SEARCH SCROLL
+      const cardsec = document.querySelector(".card-section");
+
+      cardsec.onscroll = function () {
+        searchRemove();
+      };
+
       // AFTER USER CLICKS ENTER ON SEARCH
       searchForm.addEventListener("submit", (e) => {
+
         e.preventDefault();
         searchInput.addEventListener("keyup", async (e) => {
           const cardContainer = document.querySelectorAll(".card-container");
