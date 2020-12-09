@@ -5,12 +5,7 @@ import { searchRemove } from "../scrollSearch.js";
 import { showSearchMarkers } from "./gmaps.js";
 import { filterSearch } from '../filterSearch.js';
 import { appendRestaurants } from '../appendRestaurants.js';
-import { config } from '../config.js';
-
-let ZOMATO_KEY = process.env.ZOMATO_KEY;
-let ZOMATO_URL = process.env.ZOMATO_URL;
-let gMapUrl = process.env.GMAP_URL;
-let gMapKey = process.env.GMAP_KEY;
+import { config, ZOMATO_URL, gMapUrl, gMapKey } from '../config.js';
 
 // GEOLOCATION CALL
 navigator.geolocation.getCurrentPosition(giveLocation, error);
@@ -64,8 +59,6 @@ function giveLocation(position) {
       let cardSection = document.querySelector(".card-section");
 
       appendRestaurants(geocode.data.nearby_restaurants, cardSection);
-
-      let resGeoCodeArr = getResData(geocode.data.nearby_restaurants);
 
       //  ADD SEARCH RESULT ITEMS HERE
       const searchForm = document.querySelector(".search");
@@ -121,7 +114,7 @@ function giveLocation(position) {
           title: "munch map!",
         });
 
-        for (let item of await resGeoCodeArr) {
+        for (let item of await getResData(geocode.data.nearby_restaurants)) {
           const marker = new google.maps.Marker({
             position: item.ResCoordinates,
             map,
