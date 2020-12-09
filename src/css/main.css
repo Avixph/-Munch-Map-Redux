@@ -88,10 +88,8 @@ a:hover {
 
 .refresh-nearby {
 	background: var(--darkorange);
-	border: none;
 	margin: 0 auto;
 	text-align: center;
-	outline: none;
 	height: auto;
 	position: relative;
 }
@@ -102,16 +100,22 @@ a:hover {
 	width: 10%;
 	bottom: 1px;
 	margin: 0 auto;
+	outline: none;
+	border: none;
+}
+
+.refresh-nearby button:hover {
+	background: rgb(255, 89, 0);
+}
+
+.refresh-nearby button:focus {
+	background: rgb(255, 89, 0);
 }
 
 @media only screen and (max-width: 600px) {
 	.refresh-nearby button {
 		width: auto;
 	}
-}
-
-.refresh-nearby:hover {
-	background: rgb(255, 89, 0);
 }
 
 .cuisine-item {
