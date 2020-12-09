@@ -17,6 +17,7 @@ const cardsec = document.querySelector(".card-section");
 
 //PROCEED TO THE RESTAURANT PAGE
 const proceed = document.querySelector("#proceed");
+proceed.setAttribute('href', 'error.html');
 
 cardsec.onscroll = function () {
   searchRemove();
@@ -29,7 +30,6 @@ function giveLocation(position) {
   const longitude = position.coords.longitude;
   const userLocation = { lat: latitude, lng: longitude };
 
-  proceed.setAttribute("href", "main.html");
 
   // ASYNC FUNCTION START FOR API CALLS
   async function getData() {
@@ -171,8 +171,10 @@ function giveLocation(position) {
     }
   }
   getData();
+
+  proceed.setAttribute('href', '');
+  proceed.setAttribute('href', 'main.html');
 }
 function error(message) {
-  proceed.setAttribute("href", "404.html");
-  // alert('Please give location access first!');
+  // location.reload();
 }
