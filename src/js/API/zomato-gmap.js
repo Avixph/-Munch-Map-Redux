@@ -177,5 +177,5 @@ function giveLocation(position) {
 }
 function error(message) {
   // location.reload();
-  alert('hi');
+  console.log(message);
 }
