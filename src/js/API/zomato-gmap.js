@@ -10,6 +10,16 @@ import { config, ZOMATO_URL, gMapUrl, gMapKey } from '../config.js';
 // GEOLOCATION CALL
 navigator.geolocation.getCurrentPosition(giveLocation, error);
 
+navigator.permissions.query({ name: 'geolocation' })
+  .then(function (permissionStatus) {
+    console.log('geolocation permission state is ', permissionStatus.state);
+
+    permissionStatus.onchange = function () {
+      console.log('geolocation permission state has changed to ', this.state);
+      location.reload();
+    };
+  });
+
 // SEARCH
 const cardsec = document.querySelector(".card-section");
 
