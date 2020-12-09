@@ -83,19 +83,39 @@ a:hover {
 .subzone {
 	text-align: center;
 	height: auto;
+	margin-top: 10px;
 }
 
 .refresh-nearby {
-	background: rgba(255, 111, 0, 0.671);
-	border: none;
-	width: 20%;
-	outline: none;
-	margin: 1.5em 0;
-	font-size: 1.5em;
+	background: var(--darkorange);
+	margin: 0 auto;
+	text-align: center;
+	height: auto;
+	position: relative;
 }
 
-.refresh-nearby:hover {
-	background: var(--darkorange);
+.refresh-nearby button {
+	position: absolute;
+	z-index: 3;
+	width: 10%;
+	bottom: 1px;
+	margin: 0 auto;
+	outline: none;
+	border: none;
+}
+
+.refresh-nearby button:hover {
+	background: rgb(255, 89, 0);
+}
+
+.refresh-nearby button:focus {
+	background: rgb(255, 89, 0);
+}
+
+@media only screen and (max-width: 600px) {
+	.refresh-nearby button {
+		width: auto;
+	}
 }
 
 .cuisine-item {
@@ -106,6 +126,9 @@ a:hover {
 	margin: 10px 2px;
 }
 
+.cuisine-list {
+	margin: 1em 0;
+}
 /* CARD COLUMN */
 
 .card-section {
@@ -336,10 +359,4 @@ a:hover {
 .high-cost-filter:hover,
 .distance-filter:hover {
 	background: var(--lighterorange);
-}
-
-/* IFRAME */
-iframe {
-	width: 100%;
-	height: 100%;
 }
