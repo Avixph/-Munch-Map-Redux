@@ -10,12 +10,15 @@ import { config, ZOMATO_URL, gMapUrl, gMapKey } from '../config.js';
 // GEOLOCATION CALL
 navigator.geolocation.getCurrentPosition(giveLocation, error);
 
-// SEARCH
-const cardsec = document.querySelector(".card-section");
+navigator.permissions.query({ name: 'geolocation' })
+  .then(function (permissionStatus) {
+    console.log('geolocation permission state is ', permissionStatus.state);
 
-cardsec.onscroll = function () {
-  searchRemove();
-};
+    permissionStatus.onchange = function () {
+      console.log('geolocation permission state has changed to ', this.state);
+      location.reload();
+    };
+  });
 
 // IF USER ALLOWS LOCATION
 function giveLocation(position) {
@@ -33,13 +36,14 @@ function giveLocation(position) {
         config
       );
 
-      // GETTING SEARCH RESULTS FOR ZOMATO - SORTED BY RATING
-      const searchInput = document.querySelector(".search__bar");
-
       // DISPLAY WHAT AREA THE USER IS IN
       const subzone = `${geocode.data.popularity.subzone}`;
       let area = document.querySelector(".subzone");
       area.innerText = subzone;
+
+      // REFRESH PAGE ON GPS CLICK
+      const refreshNearby = document.querySelector('.refresh-nearby');
+      refreshNearby.addEventListener('click', () => location.reload());
 
       // ALL DIV ID'S FOR CUISINE ITEMS
       const allCuisineItems = document.querySelectorAll(
@@ -60,10 +64,20 @@ function giveLocation(position) {
 
       appendRestaurants(geocode.data.nearby_restaurants, cardSection);
 
-      //  ADD SEARCH RESULT ITEMS HERE
+      // SEARCH ELEMENTS FROM DOM
+      const searchInput = document.querySelector(".search__bar");
       const searchForm = document.querySelector(".search");
 
+      // SEARCH SCROLL
+      const cardsec = document.querySelector(".card-section");
+
+      cardsec.onscroll = function () {
+        searchRemove();
+      };
+
+      // AFTER USER CLICKS ENTER ON SEARCH
       searchForm.addEventListener("submit", (e) => {
+
         e.preventDefault();
         searchInput.addEventListener("keyup", async (e) => {
           const cardContainer = document.querySelectorAll(".card-container");
@@ -77,51 +91,37 @@ function giveLocation(position) {
               config
             );
 
-            const filterButton = document.querySelector('.filter');
-            filterButton.classList.remove('d-none');
+            if (search.data.restaurants.length === 0) {
+              location.replace("error.html");
+            }
+            else {
 
-            filterSearch(searchInput.value, latitude, longitude, cardSection);
+              const filterButton = document.querySelector('.filter');
+              filterButton.classList.remove('d-none');
 
-            showSearchMarkers(getResData(search.data.restaurants), userLocation);
+              filterSearch(searchInput.value, latitude, longitude, cardSection);
 
-            appendRestaurants(search.data.restaurants, cardSection);
+              showSearchMarkers(getResData(search.data.restaurants), userLocation, 10);
 
-            const city = `${geocode.data.location.city_name}`;
-            let area = document.querySelector(".subzone");
-            area.innerText = city;
+              appendRestaurants(search.data.restaurants, cardSection);
 
-            searchInput.value = "";
+              const city = `${geocode.data.location.city_name}`;
+              let area = document.querySelector(".subzone");
+              area.innerText = city;
+
+              searchInput.value = "";
+            }
+
           }
         });
       });
 
       // DISPLAYING GMAPS JS API
       const script = document.createElement("script");
-      script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
+      script.src = `${gMapUrl}js?key=${gMapKey}&callback=showSearchMarkers`;
       script.defer = true;
 
-      window.initMap = async () => {
-        // GMAPS JS API IS LOADED AND AVAILABLE
-        const image =
-          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/3c1437507a08970278c7fd1253e1726a4b7470f8/src/images/icons/MM-Icon-sm.svg";
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 14,
-          center: userLocation,
-        });
-        new google.maps.Marker({
-          position: userLocation,
-          map,
-          title: "munch map!",
-        });
-
-        for (let item of await getResData(geocode.data.nearby_restaurants)) {
-          const marker = new google.maps.Marker({
-            position: item.ResCoordinates,
-            map,
-            icon: image,
-          });
-        }
-      };
+      showSearchMarkers(getResData(geocode.data.nearby_restaurants), userLocation, 13);
 
       // Append the 'script' element to 'head'
       document.head.appendChild(script);

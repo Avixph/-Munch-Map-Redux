@@ -85,6 +85,19 @@ a:hover {
 	height: auto;
 }
 
+.refresh-nearby {
+	background: rgba(255, 111, 0, 0.671);
+	border: none;
+	width: 20%;
+	outline: none;
+	margin: 1.5em 0;
+	font-size: 1.5em;
+}
+
+.refresh-nearby:hover {
+	background: var(--darkorange);
+}
+
 .cuisine-item {
 	background: rgba(255, 111, 0, 0.671);
 	border-radius: 12px;
@@ -124,7 +137,7 @@ a:hover {
 	text-transform: uppercase;
 	font-weight: 800;
 	margin-top: 1.1em;
-	color: rgba(0, 0, 0, 0.589);
+	color: rgba(0, 0, 0, 0.85);
 }
 
 .card-info ul li {
@@ -199,8 +212,8 @@ a:hover {
 	right: 0;
 	bottom: 0;
 	outline: none;
-	border: none;
-	background: var(--peachpuff);
+	border: 3px solid var(--darkorange);
+	background: white;
 	width: 50px;
 	height: 50px;
 	border-radius: 10px;
@@ -323,4 +336,10 @@ a:hover {
 .high-cost-filter:hover,
 .distance-filter:hover {
 	background: var(--lighterorange);
+}
+
+/* IFRAME */
+iframe {
+	width: 100%;
+	height: 100%;
 }

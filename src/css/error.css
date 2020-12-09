@@ -1,67 +1,67 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
 /* font-family: 'Rubik', sans-serif; */
 :root {
-  --marigold: #e6a42e;
-  --darkorange: rgb(255, 111, 0);
-  --white: #f3f2e9;
-  --babyblue: #b1d2f0;
-  --peachpuff: #ffda8b;
-  --grayish: #616161;
-  --rajah: #f7b06d;
-  --shadow: 6px 6px 9px #ffffff31, -6px -6px 9px #00000013;
-  --shadow-inset: inset 6px 6px 9px #00000031, inset -6px -6px 9px #a3a0a025;
-  --font: "Rubik", sans-serif;
+	--marigold: #e6a42e;
+	--darkorange: rgb(255, 111, 0);
+	--white: #f3f2e9;
+	--babyblue: #b1d2f0;
+	--peachpuff: #ffda8b;
+	--grayish: #616161;
+	--rajah: #f7b06d;
+	--shadow: 6px 6px 9px #ffffff31, -6px -6px 9px #00000013;
+	--shadow-inset: inset 6px 6px 9px #00000031, inset -6px -6px 9px #a3a0a025;
+	--font: "Rubik", sans-serif;
 }
 
 body {
-  background: transparent;
-  font-family: "Roboto Slab", serif;
-  font-weight: 500;
-  background-image: url(../images/Food-Pic.png);
-  background-position: center;
-  background-color: var(--darkorange);
-  background-size: auto auto;
-  background-repeat: no-repeat;
+	background: transparent;
+	font-family: "Roboto Slab", serif;
+	font-weight: 500;
+	background-image: url(../images/Food-Pic.png);
+	background-position: center;
+	background-color: var(--darkorange);
+	background-size: auto auto;
+	background-repeat: no-repeat;
 }
 
 .header {
-  background: transparent;
-  margin: 0;
-  padding-top: 1.5em;
-  height: 25 vh;
+	background: transparent;
+	margin: 0;
+	padding-top: 1.5em;
+	height: 25 vh;
 }
 
 @media only screen and (max-width: 600px) {
-  #logo {
-    height: 100px;
-  }
+	#logo {
+		height: 100px;
+	}
 }
 
 .page-wrap {
-  min-height: 60vh;
+	min-height: 60vh;
 }
 
 .display-1 {
-  font-size: 15em;
-  font-weight: 800;
+	font-size: 15em;
+	font-weight: 800;
 }
 
 .mb-4 {
-  font-size: 5em;
-  font-weight: 600;
-  color: var(--peachpuff);
+	font-size: 5em;
+	font-weight: 600;
+	color: var(--peachpuff);
 }
 
 .btn {
-  font-size: 3em;
-  font-weight: 500;
-  color: var(--peachpuff) !important;
-  outline: none !important;
-  text-decoration: none !important;
+	font-size: 3em;
+	font-weight: 500;
+	color: var(--peachpuff) !important;
+	outline: none !important;
+	text-decoration: none !important;
 }
 
 .btn:hover {
-  color: var(--white) !important;
-  outline: none !important;
-  text-decoration: none !important;
+	color: var(--white) !important;
+	outline: none !important;
+	text-decoration: none !important;
 }
