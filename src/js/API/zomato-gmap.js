@@ -17,7 +17,7 @@ const cardsec = document.querySelector(".card-section");
 
 //PROCEED TO THE RESTAURANT PAGE
 const proceed = document.querySelector("#proceed");
-proceed.setAttribute('href', 'error.html');
+// proceed.setAttribute('href', 'error.html');
 
 cardsec.onscroll = function () {
   searchRemove();
