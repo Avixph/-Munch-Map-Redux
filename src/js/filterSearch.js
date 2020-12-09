@@ -1,13 +1,12 @@
-import { appendRestaurants } from './appendRestaurants.js';
 import axios from 'axios';
+import { appendRestaurants } from './appendRestaurants.js';
 import { config, ZOMATO_KEY, ZOMATO_URL } from './config.js';
 import { showSearchMarkers } from './API/gmaps.js';
-
-// export async function showSearchMarkers(arr, position, zoomLevel) {
+import { getResData } from './getResData.js';
 
 export function filterSearch(searchInput, x, y, div) {
 
-    // const userLoc = { lat: 40.7128, long: -74.0060 };
+    const location = { lat: x, lng: y };
 
     const ratingFilter = document.querySelector('.rating-filter');
     const costLowToHigh = document.querySelector('.low-cost-filter');
@@ -19,7 +18,7 @@ export function filterSearch(searchInput, x, y, div) {
             `${ZOMATO_URL}search?q=${searchInput}&count=50&lat=${x}&lon=${y}&sort=rating`,
             config
         );
-        // showSearchMarkers(Object.values(getRatingSort), userLoc, 10);
+        showSearchMarkers(getResData(getRatingSort.data.restaurants), location, 10);
         appendRestaurants(getRatingSort.data.restaurants, div);
 
     });
@@ -28,7 +27,7 @@ export function filterSearch(searchInput, x, y, div) {
             `${ZOMATO_URL}search?q=${searchInput}&count=50&lat=${x}&lon=${y}&sort=cost&order=asc`,
             config
         );
-        // showSearchMarkers(Object.values(getLowCostSort), userLoc, 10);
+        showSearchMarkers(getResData(getLowCostSort.data.restaurants), location, 10);
         appendRestaurants(getLowCostSort.data.restaurants, div);
     });
     costHighToLow.addEventListener('click', async () => {
@@ -36,7 +35,7 @@ export function filterSearch(searchInput, x, y, div) {
             `${ZOMATO_URL}search?q=${searchInput}&count=50&lat=${x}&lon=${y}&sort=cost&order=desc`,
             config
         );
-        // showSearchMarkers(Object.values(getHighCostSort), userLoc, 10);
+        showSearchMarkers(getResData(getHighCostSort.data.restaurants), location, 10);
         appendRestaurants(getHighCostSort.data.restaurants, div);
     });
     distanceFilter.addEventListener('click', async () => {
@@ -44,7 +43,7 @@ export function filterSearch(searchInput, x, y, div) {
             `${ZOMATO_URL}search?q=${searchInput}&count=50&lat=${x}&lon=${y}&sort=real_distance`,
             config
         );
-        // showSearchMarkers(Object.values(getDistanceFilter), userLoc, 10);
+        showSearchMarkers(getResData(getDistanceFilter.data.restaurants), location, 10);
         appendRestaurants(getDistanceFilter.data.restaurants, div);
     });
 }
