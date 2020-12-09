@@ -38,7 +38,7 @@ a:hover {
 }
 
 .header {
-	background: rgb(255, 111, 0);
+	background: var(--darkorange);
 	color: white;
 	margin: 0;
 	padding-top: 1.5em;
