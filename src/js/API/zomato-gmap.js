@@ -118,10 +118,31 @@ function giveLocation(position) {
 
       // DISPLAYING GMAPS JS API
       const script = document.createElement("script");
-      script.src = `${gMapUrl}js?key=${gMapKey}&callback=showSearchMarkers`;
+      script.src = `${gMapUrl}js?key=${gMapKey}&callback=initMap`;
       script.defer = true;
 
-      showSearchMarkers(getResData(geocode.data.nearby_restaurants), userLocation, 13);
+      window.initMap = async () => {
+        // GMAPS JS API IS LOADED AND AVAILABLE
+        const image =
+          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/c47b818f43e4ad6b7a0dff30050b72002180fbf0/src/images/icons/MM-Icon-sm.svg";
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 14,
+          center: userLocation,
+        });
+        new google.maps.Marker({
+          position: userLocation,
+          map,
+          title: "munch map!",
+        });
+
+        for (let item of await getResData(geocode.data.nearby_restaurants)) {
+          const marker = new google.maps.Marker({
+            position: item.ResCoordinates,
+            map,
+            icon: image,
+          });
+        }
+      };
 
       // Append the 'script' element to 'head'
       document.head.appendChild(script);
