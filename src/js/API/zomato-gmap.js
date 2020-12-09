@@ -103,7 +103,7 @@ function giveLocation(position) {
       window.initMap = async () => {
         // GMAPS JS API IS LOADED AND AVAILABLE
         const image =
-          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/3c1437507a08970278c7fd1253e1726a4b7470f8/src/images/icons/MM-Icon-sm.svg";
+          "https://raw.githubusercontent.com/Avixph/-Munch-Map-Redux/c47b818f43e4ad6b7a0dff30050b72002180fbf0/src/images/icons/MM-Icon-sm.svg";
         const map = new google.maps.Map(document.getElementById("map"), {
           zoom: 14,
           center: userLocation,
