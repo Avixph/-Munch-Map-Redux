@@ -172,9 +172,10 @@ function giveLocation(position) {
   }
   getData();
 
-  proceed.setAttribute('href', '');
-  proceed.setAttribute('href', 'main.html');
+  // proceed.setAttribute('href', '');
+  // proceed.setAttribute('href', 'main.html');
 }
 function error(message) {
   // location.reload();
+  alert('hi');
 }
