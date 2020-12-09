@@ -17,7 +17,7 @@ const cardsec = document.querySelector(".card-section");
 
 //PROCEED TO THE RESTAURANT PAGE
 const proceed = document.querySelector("#proceed");
-proceed.setAttribute('href', 'error.html');
+// proceed.setAttribute('href', 'error.html');
 
 cardsec.onscroll = function () {
   searchRemove();
@@ -172,9 +172,10 @@ function giveLocation(position) {
   }
   getData();
 
-  proceed.setAttribute('href', '');
-  proceed.setAttribute('href', 'main.html');
+  // proceed.setAttribute('href', '');
+  // proceed.setAttribute('href', 'main.html');
 }
 function error(message) {
   // location.reload();
+  alert('hi');
 }
