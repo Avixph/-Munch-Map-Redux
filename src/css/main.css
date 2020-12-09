@@ -3,6 +3,7 @@
 :root {
 	--marigold: #e6a42e;
 	--darkorange: rgb(255, 111, 0);
+	--lighterorange: rgb(250, 139, 55);
 	--white: #f3f2e9;
 	--babyblue: #b1d2f0;
 	--peachpuff: #ffda8b;
@@ -213,11 +214,11 @@ a:hover {
 }
 .search__bar:focus {
 	width: 300px;
-	left: auto;
+	right: auto;
 	opacity: 1;
 	cursor: text;
 	transition: all 0.2;
-	padding-left: 25px;
+	padding-left: 90px;
 	padding-right: 70px;
 }
 .search__toggler {
@@ -282,4 +283,44 @@ a:hover {
 	background: var(--white);
 	border-radius: 0%;
 	transform: rotate(-45deg);
+}
+
+.filter {
+	text-align: right;
+	margin-bottom: 1em;
+}
+
+.filter button {
+	outline: none;
+	border: none;
+	background: var(--darkorange);
+}
+
+#dropdownMenuButton:hover,
+#dropdownMenuButton:focus {
+	outline: none;
+	border: none;
+	background: var(--lighterorange);
+}
+
+.rating-filter,
+.low-cost-filter,
+.high-cost-filter,
+.distance-filter {
+	text-align: center;
+	cursor: pointer;
+	color: black;
+}
+
+.rating-filter:active,
+.low-cost-filter:active,
+.high-cost-filter:active,
+.distance-filter:active {
+	color: black;
+}
+.rating-filter:hover,
+.low-cost-filter:hover,
+.high-cost-filter:hover,
+.distance-filter:hover {
+	background: var(--lighterorange);
 }

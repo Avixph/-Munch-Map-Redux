@@ -1,23 +1,17 @@
 import axios from "axios";
-import { populateRestaurants } from "../populateRestaurants.js";
+
 import { getResData } from "../getResData.js";
 import { searchRemove } from "../scrollSearch.js";
 import { showSearchMarkers } from "./gmaps.js";
-
-let ZOMATO_KEY = process.env.ZOMATO_KEY;
-let ZOMATO_URL = process.env.ZOMATO_URL;
-let gMapUrl = process.env.GMAP_URL;
-let gMapKey = process.env.GMAP_KEY;
+import { filterSearch } from '../filterSearch.js';
+import { appendRestaurants } from '../appendRestaurants.js';
+import { config, ZOMATO_URL, gMapUrl, gMapKey } from '../config.js';
 
 // GEOLOCATION CALL
 navigator.geolocation.getCurrentPosition(giveLocation, error);
 
 // SEARCH
 const cardsec = document.querySelector(".card-section");
-
-//PROCEED TO THE RESTAURANT PAGE
-const proceed = document.querySelector("#proceed");
-// proceed.setAttribute('href', 'error.html');
 
 cardsec.onscroll = function () {
   searchRemove();
@@ -30,17 +24,9 @@ function giveLocation(position) {
   const longitude = position.coords.longitude;
   const userLocation = { lat: latitude, lng: longitude };
 
-
   // ASYNC FUNCTION START FOR API CALLS
   async function getData() {
     try {
-      const config = {
-        headers: {
-          Accept: "application/json",
-          "user-key": `${ZOMATO_KEY}`,
-        },
-      };
-
       // GETTING GEOCODE DATA FOR ZOMATO
       const geocode = await axios.get(
         `${ZOMATO_URL}geocode?lat=${latitude}&lon=${longitude}`,
@@ -72,23 +58,7 @@ function giveLocation(position) {
 
       let cardSection = document.querySelector(".card-section");
 
-      // APPENDING NEW RESTAURANT CARDS TO OUR DOM
-      function appendRestaurants() {
-        const cardContainer = document.querySelectorAll(".card-container");
-        for (let div of cardContainer) {
-          div.remove();
-        }
-        for (let item of getResData(geocode.data.nearby_restaurants)) {
-          let resDiv = document.createElement("div");
-          resDiv.classList.add("d-flex", "justify-content-center");
-          resDiv.innerHTML = populateRestaurants(item);
-          cardSection.append(resDiv);
-        }
-      }
-
-      appendRestaurants();
-
-      let resGeoCodeArr = getResData(geocode.data.nearby_restaurants);
+      appendRestaurants(geocode.data.nearby_restaurants, cardSection);
 
       //  ADD SEARCH RESULT ITEMS HERE
       const searchForm = document.querySelector(".search");
@@ -103,35 +73,24 @@ function giveLocation(position) {
 
           if (e.keyCode === 13) {
             const search = await axios.get(
-              `https://developers.zomato.com/api/v2.1/search?q=${searchInput.value}&count=20&lat=${latitude}&lon=${longitude}&sort=rating`,
+              `${ZOMATO_URL}search?q=${searchInput.value}&count=50&lat=${latitude}&lon=${longitude}`,
               config
             );
 
-            showSearchMarkers(
-              getResData(search.data.restaurants),
-              userLocation
-            );
+            const filterButton = document.querySelector('.filter');
+            filterButton.classList.remove('d-none');
 
-            function appendRestaurants() {
-              const cardContainer = document.querySelectorAll(
-                ".card-container"
-              );
-              for (let div of cardContainer) {
-                div.remove();
-              }
-              for (let item of getResData(search.data.restaurants)) {
-                let resDiv = document.createElement("div");
-                resDiv.classList.add("d-flex", "justify-content-center");
-                resDiv.innerHTML = populateRestaurants(item);
-                cardSection.append(resDiv);
-              }
-            }
+            filterSearch(searchInput.value, latitude, longitude, cardSection);
 
-            appendRestaurants();
+            showSearchMarkers(getResData(search.data.restaurants), userLocation);
+
+            appendRestaurants(search.data.restaurants, cardSection);
 
             const city = `${geocode.data.location.city_name}`;
             let area = document.querySelector(".subzone");
             area.innerText = city;
+
+            searchInput.value = "";
           }
         });
       });
@@ -155,7 +114,7 @@ function giveLocation(position) {
           title: "munch map!",
         });
 
-        for (let item of await resGeoCodeArr) {
+        for (let item of await getResData(geocode.data.nearby_restaurants)) {
           const marker = new google.maps.Marker({
             position: item.ResCoordinates,
             map,
@@ -171,11 +130,9 @@ function giveLocation(position) {
     }
   }
   getData();
-
-  // proceed.setAttribute('href', '');
-  // proceed.setAttribute('href', 'main.html');
 }
 function error(message) {
-  // location.reload();
-  console.log(message);
+  const proceed = document.querySelector('#proceed');
+  proceed.setAttribute('href', '#');
+  alert('Please give location access first!');
 }
