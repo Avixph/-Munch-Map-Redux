@@ -86,16 +86,31 @@ a:hover {
 }
 
 .refresh-nearby {
-	background: rgba(255, 111, 0, 0.671);
+	background: var(--darkorange);
 	border: none;
-	width: 20%;
+	margin: 0 auto;
+	text-align: center;
 	outline: none;
-	margin: 1.5em 0;
-	font-size: 1.5em;
+	height: auto;
+	position: relative;
+}
+
+.refresh-nearby button {
+	position: absolute;
+	z-index: 3;
+	width: 10%;
+	bottom: 1px;
+	margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+	.refresh-nearby button {
+		width: auto;
+	}
 }
 
 .refresh-nearby:hover {
-	background: var(--darkorange);
+	background: rgb(255, 89, 0);
 }
 
 .cuisine-item {
@@ -336,10 +351,4 @@ a:hover {
 .high-cost-filter:hover,
 .distance-filter:hover {
 	background: var(--lighterorange);
-}
-
-/* IFRAME */
-iframe {
-	width: 100%;
-	height: 100%;
 }
