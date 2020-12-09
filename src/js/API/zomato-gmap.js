@@ -80,20 +80,27 @@ function giveLocation(position) {
               config
             );
 
-            const filterButton = document.querySelector('.filter');
-            filterButton.classList.remove('d-none');
+            if (search.data.restaurants.length === 0) {
+              location.replace("error.html");
+            }
+            else {
 
-            filterSearch(searchInput.value, latitude, longitude, cardSection);
+              const filterButton = document.querySelector('.filter');
+              filterButton.classList.remove('d-none');
 
-            showSearchMarkers(getResData(search.data.restaurants), userLocation);
+              filterSearch(searchInput.value, latitude, longitude, cardSection);
 
-            appendRestaurants(search.data.restaurants, cardSection);
+              showSearchMarkers(getResData(search.data.restaurants), userLocation);
 
-            const city = `${geocode.data.location.city_name}`;
-            let area = document.querySelector(".subzone");
-            area.innerText = city;
+              appendRestaurants(search.data.restaurants, cardSection);
 
-            searchInput.value = "";
+              const city = `${geocode.data.location.city_name}`;
+              let area = document.querySelector(".subzone");
+              area.innerText = city;
+
+              searchInput.value = "";
+            }
+
           }
         });
       });
