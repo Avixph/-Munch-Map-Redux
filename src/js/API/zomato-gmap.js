@@ -33,13 +33,14 @@ function giveLocation(position) {
         config
       );
 
-      // GETTING SEARCH RESULTS FOR ZOMATO - SORTED BY RATING
-      const searchInput = document.querySelector(".search__bar");
-
       // DISPLAY WHAT AREA THE USER IS IN
       const subzone = `${geocode.data.popularity.subzone}`;
       let area = document.querySelector(".subzone");
       area.innerText = subzone;
+
+      // REFRESH PAGE ON GPS CLICK
+      const refreshNearby = document.querySelector('.refresh-nearby');
+      refreshNearby.addEventListener('click', () => location.reload());
 
       // ALL DIV ID'S FOR CUISINE ITEMS
       const allCuisineItems = document.querySelectorAll(
@@ -60,9 +61,11 @@ function giveLocation(position) {
 
       appendRestaurants(geocode.data.nearby_restaurants, cardSection);
 
-      //  ADD SEARCH RESULT ITEMS HERE
+      // SEARCH ELEMENTS FROM DOM
+      const searchInput = document.querySelector(".search__bar");
       const searchForm = document.querySelector(".search");
 
+      // AFTER USER CLICKS ENTER ON SEARCH
       searchForm.addEventListener("submit", (e) => {
         e.preventDefault();
         searchInput.addEventListener("keyup", async (e) => {
