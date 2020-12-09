@@ -60,8 +60,6 @@ function giveLocation(position) {
 
       appendRestaurants(geocode.data.nearby_restaurants, cardSection);
 
-      let resGeoCodeArr = getResData(geocode.data.nearby_restaurants);
-
       //  ADD SEARCH RESULT ITEMS HERE
       const searchForm = document.querySelector(".search");
 
@@ -116,7 +114,7 @@ function giveLocation(position) {
           title: "munch map!",
         });
 
-        for (let item of await resGeoCodeArr) {
+        for (let item of await getResData(geocode.data.nearby_restaurants)) {
           const marker = new google.maps.Marker({
             position: item.ResCoordinates,
             map,
