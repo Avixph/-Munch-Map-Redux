@@ -79,7 +79,7 @@ a:hover {
 	flex-direction: column;
 	justify-content: center;
 	height: 75vh;
-	background: rgba(255, 218, 184, 0.83);
+	background: var(--rajah);
 }
 
 .intro button,
