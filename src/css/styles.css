@@ -13,9 +13,21 @@
 	--font: "Roboto Slab", serif;
 }
 
+video {
+	position: fixed;
+	top: 50%;
+	left: 10%;
+	min-width: 100%;
+	min-height: fit-content;
+	width: auto;
+	height: 100%;
+	z-index: -100;
+	transform: translate(-40%, -50%);
+}
 body {
 	font-family: "Roboto Slab", serif;
 	height: 100vh;
+	overflow: hidden;
 }
 
 a {
@@ -67,11 +79,6 @@ a:hover {
 	margin: 0;
 	padding: 0;
 	height: 75vh;
-	background-image: url("../images/temp/test.jpg");
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: top left;
 }
 
 .intro {
