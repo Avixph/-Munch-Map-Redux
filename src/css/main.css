@@ -335,13 +335,13 @@ a:hover {
 
 .filter {
 	position: relative;
-	bottom: 80px;
+	bottom: 83px;
 	text-align: right;
 	margin-bottom: 1em;
 }
 
 .filter button {
-	width: 60px;
+	width: auto;
 	height: 60px;
 	border-radius: 10px;
 	outline: none;
