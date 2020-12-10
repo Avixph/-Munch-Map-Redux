@@ -104,7 +104,6 @@ a:hover {
 .refresh-nearby button {
 	position: absolute;
 	z-index: 3;
-	width: 10%;
 	bottom: 1px;
 	margin: 0 auto;
 	outline: none;
@@ -160,6 +159,7 @@ a:hover {
 }
 
 .card-container {
+	margin-top: -1em;
 	box-shadow: var(--shadow);
 	border-radius: 12px;
 	filter: drop-shadow(1px 40px 20px #000000bb);
@@ -342,11 +342,16 @@ a:hover {
 }
 
 .filter {
+	position: relative;
+	bottom: 80px;
 	text-align: right;
 	margin-bottom: 1em;
 }
 
 .filter button {
+	width: 60px;
+	height: 60px;
+	border-radius: 10px;
 	outline: none;
 	border: none;
 	background: var(--darkorange);
