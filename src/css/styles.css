@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
 
 :root {
 	--marigold: #e6a42e;
@@ -10,12 +10,24 @@
 	--rajah: #f7b06d;
 	--shadow: 6px 6px 9px #ffffff31, -6px -6px 9px #00000013;
 	--shadow-inset: inset 6px 6px 9px #00000031, inset -6px -6px 9px #a3a0a025;
-	--font: "Roboto Slab", serif;
+	--font: "Rubik", sans-serif;
 }
 
+video {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	min-width: 100%;
+	min-height: fit-content;
+	width: auto;
+	height: 100%;
+	z-index: -100;
+	transform: translate(-60%, -50%);
+}
 body {
-	font-family: "Roboto Slab", serif;
+	font-family: var(--font);
 	height: 100vh;
+	overflow: hidden;
 }
 
 a {
@@ -40,10 +52,8 @@ a:hover {
 	height: 25vh;
 }
 
-@media only screen and (max-width: 600px) {
-	#logo {
-		height: 100px;
-	}
+#logo {
+	height: 100%;
 }
 
 .title {
@@ -69,11 +79,6 @@ a:hover {
 	margin: 0;
 	padding: 0;
 	height: 75vh;
-	background-image: url("../images/temp/test.jpg");
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: top left;
 }
 
 .intro {
@@ -81,7 +86,7 @@ a:hover {
 	flex-direction: column;
 	justify-content: center;
 	height: 75vh;
-	background: rgba(255, 218, 184, 0.83);
+	background: var(--rajah);
 }
 
 .intro button,

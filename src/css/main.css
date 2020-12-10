@@ -18,6 +18,9 @@
 	opacity: 0.2;
 }
 
+html {
+	height: 100%;
+}
 body {
 	font-family: var(--font);
 	height: 100vh;
@@ -33,10 +36,6 @@ a:hover {
 	text-decoration: none;
 }
 
-.test {
-	height: 100vh;
-}
-
 .header {
 	background: var(--darkorange);
 	color: white;
@@ -45,13 +44,9 @@ a:hover {
 	height: 25vh;
 }
 
-@media only screen and (max-width: 600px) {
-	#logo {
-		height: 100px;
-		margin-top: 0.6em;
-	}
+#logo {
+	height: 100%;
 }
-
 .title {
 	color: var(--white);
 	font-weight: bold;
@@ -75,10 +70,15 @@ a:hover {
 }
 
 #map {
-	margin-bottom: 2em;
-	height: 300px;
+	margin-bottom: 1em;
+	height: 100%;
 }
 
+@media only screen and (max-width: 900px) {
+	#map {
+		height: 300px;
+	}
+}
 /*  SUBZONE SECTION */
 .subzone {
 	text-align: center;
@@ -96,7 +96,6 @@ a:hover {
 .refresh-nearby button {
 	position: absolute;
 	z-index: 3;
-	width: 10%;
 	bottom: 1px;
 	margin: 0 auto;
 	outline: none;
@@ -117,6 +116,22 @@ a:hover {
 	}
 }
 
+.cuisine-list {
+	width: 90%;
+	margin: 1em auto;
+}
+
+#cuisine-1,
+#cuisine-2,
+#cuisine-3,
+#cuisine-4,
+#cuisine-5 {
+	margin: 0.5em;
+	padding: 0 0.5em;
+	border-radius: 5%;
+	background: var(--darkorange);
+}
+
 .cuisine-item {
 	background: rgba(255, 111, 0, 0.671);
 	border-radius: 12px;
@@ -125,9 +140,6 @@ a:hover {
 	margin: 10px 2px;
 }
 
-.cuisine-list {
-	margin: 1em 0;
-}
 /* CARD COLUMN */
 
 .card-section {
@@ -139,6 +151,7 @@ a:hover {
 }
 
 .card-container {
+	margin-top: -1em;
 	box-shadow: var(--shadow);
 	border-radius: 12px;
 	filter: drop-shadow(1px 40px 20px #000000bb);
@@ -321,11 +334,16 @@ a:hover {
 }
 
 .filter {
+	position: relative;
+	bottom: 83px;
 	text-align: right;
 	margin-bottom: 1em;
 }
 
 .filter button {
+	width: auto;
+	height: 60px;
+	border-radius: 10px;
 	outline: none;
 	border: none;
 	background: var(--darkorange);

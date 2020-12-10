@@ -18,32 +18,31 @@ export function filterSearch(searchInput, x, y, div) {
             `${ZOMATO_URL}search?q=${searchInput}&count=50&lat=${x}&lon=${y}&sort=rating`,
             config
         );
-        showSearchMarkers(getResData(getRatingSort.data.restaurants), location, 10);
         appendRestaurants(getRatingSort.data.restaurants, div);
-
+        showSearchMarkers(getResData(getRatingSort.data.restaurants), location, 10);
     });
     costLowToHigh.addEventListener('click', async () => {
         const getLowCostSort = await axios.get(
             `${ZOMATO_URL}search?q=${searchInput}&count=50&lat=${x}&lon=${y}&sort=cost&order=asc`,
             config
         );
-        showSearchMarkers(getResData(getLowCostSort.data.restaurants), location, 10);
         appendRestaurants(getLowCostSort.data.restaurants, div);
+        showSearchMarkers(getResData(getLowCostSort.data.restaurants), location, 10);
     });
     costHighToLow.addEventListener('click', async () => {
         const getHighCostSort = await axios.get(
             `${ZOMATO_URL}search?q=${searchInput}&count=50&lat=${x}&lon=${y}&sort=cost&order=desc`,
             config
         );
-        showSearchMarkers(getResData(getHighCostSort.data.restaurants), location, 10);
         appendRestaurants(getHighCostSort.data.restaurants, div);
+        showSearchMarkers(getResData(getHighCostSort.data.restaurants), location, 10);
     });
     distanceFilter.addEventListener('click', async () => {
         const getDistanceFilter = await axios.get(
             `${ZOMATO_URL}search?q=${searchInput}&count=50&lat=${x}&lon=${y}&sort=real_distance`,
             config
         );
-        showSearchMarkers(getResData(getDistanceFilter.data.restaurants), location, 10);
         appendRestaurants(getDistanceFilter.data.restaurants, div);
+        showSearchMarkers(getResData(getDistanceFilter.data.restaurants), location, 10);
     });
 }

@@ -100,9 +100,7 @@ function giveLocation(position) {
               filterButton.classList.remove('d-none');
 
               filterSearch(searchInput.value, latitude, longitude, cardSection);
-
               showSearchMarkers(getResData(search.data.restaurants), userLocation, 10);
-
               appendRestaurants(search.data.restaurants, cardSection);
 
               const city = `${geocode.data.location.city_name}`;

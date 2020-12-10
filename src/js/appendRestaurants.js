@@ -2,6 +2,7 @@ import { getResData } from './getResData.js';
 import { populateRestaurants } from './populateRestaurants.js';
 
 function appendRestaurants(data, div) {
+    // Check populate restaurant to see where we got .card-container
     const cardContainer = document.querySelectorAll(
         ".card-container"
     );
