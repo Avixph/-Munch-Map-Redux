@@ -18,6 +18,9 @@
 	opacity: 0.2;
 }
 
+html {
+	height: 100%;
+}
 body {
 	font-family: var(--font);
 	height: 100vh;
@@ -75,10 +78,15 @@ a:hover {
 }
 
 #map {
-	margin-bottom: 2em;
-	height: 300px;
+	margin-bottom: 1em;
+	height: 100%;
 }
 
+@media only screen and (max-width: 900px) {
+	#map {
+		height: 300px;
+	}
+}
 /*  SUBZONE SECTION */
 .subzone {
 	text-align: center;
@@ -117,6 +125,22 @@ a:hover {
 	}
 }
 
+.cuisine-list {
+	width: 90%;
+	margin: 1em auto;
+}
+
+#cuisine-1,
+#cuisine-2,
+#cuisine-3,
+#cuisine-4,
+#cuisine-5 {
+	margin: 0.5em;
+	padding: 0 0.5em;
+	border-radius: 5%;
+	background: var(--darkorange);
+}
+
 .cuisine-item {
 	background: rgba(255, 111, 0, 0.671);
 	border-radius: 12px;
@@ -125,9 +149,6 @@ a:hover {
 	margin: 10px 2px;
 }
 
-.cuisine-list {
-	margin: 1em 0;
-}
 /* CARD COLUMN */
 
 .card-section {
