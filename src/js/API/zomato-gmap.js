@@ -92,7 +92,7 @@ function giveLocation(position) {
             );
 
             if (search.data.restaurants.length === 0) {
-              location.replace("404.html");
+              window.location.href = "404.html";
             }
             else {
 
