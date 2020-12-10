@@ -16,13 +16,13 @@
 video {
 	position: fixed;
 	top: 50%;
-	left: 10%;
+	left: 50%;
 	min-width: 100%;
 	min-height: fit-content;
 	width: auto;
 	height: 100%;
 	z-index: -100;
-	transform: translate(-40%, -50%);
+	transform: translate(-60%, -50%);
 }
 body {
 	font-family: "Roboto Slab", serif;
