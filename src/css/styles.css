@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
 
 :root {
 	--marigold: #e6a42e;
@@ -10,7 +10,7 @@
 	--rajah: #f7b06d;
 	--shadow: 6px 6px 9px #ffffff31, -6px -6px 9px #00000013;
 	--shadow-inset: inset 6px 6px 9px #00000031, inset -6px -6px 9px #a3a0a025;
-	--font: "Roboto Slab", serif;
+	--font: "Rubik", sans-serif;
 }
 
 video {
@@ -25,7 +25,7 @@ video {
 	transform: translate(-60%, -50%);
 }
 body {
-	font-family: "Roboto Slab", serif;
+	font-family: var(--font);
 	height: 100vh;
 	overflow: hidden;
 }
