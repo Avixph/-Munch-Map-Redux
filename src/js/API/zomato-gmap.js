@@ -3,19 +3,20 @@ import axios from "axios";
 import { getResData } from "../getResData.js";
 import { searchRemove } from "../scrollSearch.js";
 import { showSearchMarkers } from "./gmaps.js";
-import { filterSearch } from '../filterSearch.js';
-import { appendRestaurants } from '../appendRestaurants.js';
-import { config, ZOMATO_URL, gMapUrl, gMapKey } from '../config.js';
+import { filterSearch } from "../filterSearch.js";
+import { appendRestaurants } from "../appendRestaurants.js";
+import { config, ZOMATO_URL, gMapUrl, gMapKey } from "../config.js";
 
 // GEOLOCATION CALL
 navigator.geolocation.getCurrentPosition(giveLocation, error);
 
-navigator.permissions.query({ name: 'geolocation' })
+navigator.permissions
+  .query({ name: "geolocation" })
   .then(function (permissionStatus) {
-    console.log('geolocation permission state is ', permissionStatus.state);
+    console.log("geolocation permission state is ", permissionStatus.state);
 
     permissionStatus.onchange = function () {
-      console.log('geolocation permission state has changed to ', this.state);
+      console.log("geolocation permission state has changed to ", this.state);
       location.reload();
     };
   });
@@ -42,8 +43,8 @@ function giveLocation(position) {
       area.innerText = subzone;
 
       // REFRESH PAGE ON GPS CLICK
-      const refreshNearby = document.querySelector('.refresh-nearby');
-      refreshNearby.addEventListener('click', () => location.reload());
+      const refreshNearby = document.querySelector(".refresh-nearby");
+      refreshNearby.addEventListener("click", () => location.reload());
 
       // ALL DIV ID'S FOR CUISINE ITEMS
       const allCuisineItems = document.querySelectorAll(
@@ -77,7 +78,6 @@ function giveLocation(position) {
 
       // AFTER USER CLICKS ENTER ON SEARCH
       searchForm.addEventListener("submit", (e) => {
-
         e.preventDefault();
         searchInput.addEventListener("keyup", async (e) => {
           const cardContainer = document.querySelectorAll(".card-container");
@@ -93,14 +93,16 @@ function giveLocation(position) {
 
             if (search.data.restaurants.length === 0) {
               window.location.href = "404.html";
-            }
-            else {
-
-              const filterButton = document.querySelector('.filter');
-              filterButton.classList.remove('d-none');
+            } else {
+              const filterButton = document.querySelector(".filter");
+              filterButton.classList.remove("d-none");
 
               filterSearch(searchInput.value, latitude, longitude, cardSection);
-              showSearchMarkers(getResData(search.data.restaurants), userLocation, 10);
+              showSearchMarkers(
+                getResData(search.data.restaurants),
+                userLocation,
+                10
+              );
               appendRestaurants(search.data.restaurants, cardSection);
 
               const city = `${geocode.data.location.city_name}`;
@@ -109,7 +111,6 @@ function giveLocation(position) {
 
               searchInput.value = "";
             }
-
           }
         });
       });
@@ -151,7 +152,7 @@ function giveLocation(position) {
   getData();
 }
 function error(message) {
-  const proceed = document.querySelector('#proceed');
-  proceed.setAttribute('href', '#');
-  alert('Please give location access first!');
+  const proceed = document.querySelector("#proceed");
+  proceed.setAttribute("href", "#");
+  alert("Please give location access first!");
 }
