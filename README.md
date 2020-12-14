@@ -39,6 +39,7 @@ The following are the API utilized by Munch Map
 
 ## 🗓 Additional 📌
 Features we would like to add in the future:
+> - Grid view mode for the restaurant cards
 > - [Direction services](https://developers.google.com/maps/documentation/javascript/examples/directions-complex#maps_directions_complex-html)
 > - [Point of Interest click event for the map icons](https://developers.google.com/maps/documentation/javascript/examples/event-poi)
 > - Location sharing through email or social media
