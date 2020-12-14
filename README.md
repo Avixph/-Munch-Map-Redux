@@ -23,10 +23,11 @@ Munch Map is a platform where users can explore local restaurants and see them i
  | ![Munch Map Logo](src/images/logos/MunchMap-logo.png) | ![Munch Map Logo](src/images/logos/MM-Logo-sm.png) |
  | Work in Progress                                      | final                                              |
 
- | Desktop                                                  | Tablet                                                        | Mobile                                                        |
+ | Mockups                                                  |                                                               |                                                               |
  | -------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
  | ![Munch Map Desktop](src/images/MunchMap-DesktopLP2.png) | ![Munch Map Tablet Landing](src/images/MunchMap-TabletLP.png) | ![Munch Map Mobile Landing](src/images/MunchMap-MobileLP.png) |
  | ![Munch Map Desktop](src/images/MunchMap-Desktop.png)    | ![Munch Map Tablet](src/images/MunchMap-Tablet.png)           | ![Munch Map Mobile](src/images/MunchMap-Mobile.png)           |
+ | Desktop                                                  | Tablet                                                        | Mobile                                                        |
 
 ## 💻 API 💻
 The following are the API utilized by Munch Map
