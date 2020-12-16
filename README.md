@@ -10,7 +10,7 @@ Munch Map is a platform where users can explore local restaurants and see them i
 > - Utilizes location services to find user
 > - Lists all local restaurants
 > - View restaurants on map
-> - Filter restaurants by cuisine, ratings, pricing
+> - Filter restaurants by cuisine, ratings, pricing and distance
 >
 > Goals
 > - Bring local restaurants to the users
